@@ -14,11 +14,16 @@
 require'connection.php';
 session_start();
 
-$projectID = $_POST['projectID']; #needs the value of current poject id from other pages
+//$projectID = $_POST['projectID']; #needs the value of current poject id from other pages
+$projectID = 7;
 
-$phases = array();
+$newPhaseIDQuery =  'SELECT MAX(phaseID) as newIDPhase from Phase where projectID ="'.$projectID.'"';
+$result = mysqli_query($connection, $newPhaseIDQuery);
+$newPhaseID = mysqli_fetch_assoc($result);
+$_SESSION["PhaseIDNew"] = $newPhaseID['newIDPhase'];
+
 $query =  'select phaseID, taskName, estimatedCost, actualCost, estimatedStartDate, estimatedEndDate, actualStartDate, status,
-actualEndDate, status from Phase where projectID ="'.$projectID.'"';
+actualEndDate, status from Phase where projectID ="'.$projectID.'" ORDER BY status';
 $results = mysqli_query($connection, $query);
 
 echo "This section contains detailed information on each phase. You may proceed to place an order or make a payment as well";

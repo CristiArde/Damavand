@@ -11,15 +11,14 @@ $estEndDate = $_POST['estEndDate'];
 $actualStartDate = $_POST['actualStartDate'];
 $actualEndDate = $_POST['actualEndDate'];
 $status = $_POST['status'];
+$retrievePhaseID = $_SESSION['PhaseIDNew'];
+
+$newPhaseID = $retrievePhaseID + 1;
 
 $query =  "INSERT INTO Phase (phaseID, projectID, taskName, estimatedCost, actualCost, estimatedStartDate, estimatedEndDate, actualStartDate,
-actualEndDate, status) VALUES ('5','".$projectID."','".$phaseName."','".$estimatedCost."','".$actualCost."','".$estStartDate."','".$estEndDate."','".$actualStartDate."','".$actualEndDate."','".$status."')";
-
-//$results = mysqli_query($query, $connection);
+actualEndDate, status) VALUES ('".$newPhaseID."','".$projectID."','".$phaseName."','".$estimatedCost."','".$actualCost."','".$estStartDate."','".$estEndDate."','".$actualStartDate."','".$actualEndDate."','".$status."')";
 $connection->query($query);
-print_r($query);
 
-//mysqli_free_result($results);
 mysqli_close($connection);
-//header('Location: /Damavand/projectDetails.php');
+header('Location: /Damavand/projectDetails.php');
 ?>

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 30, 2017 at 08:50 PM
+-- Generation Time: Mar 30, 2017 at 10:37 PM
 -- Server version: 5.7.14
--- PHP Version: 7.0.10
+-- PHP Version: 5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -190,6 +190,13 @@ CREATE TABLE `orders` (
   `estimatedDeliveryDate` date NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`orderID`, `projectID`, `taskID`, `phaseID`, `supplierID`, `totalCost`, `orderDate`, `estimatedDeliveryDate`) VALUES
+(1, 1, 1, 1, 1, '580', '2017-03-09', '2017-03-31');
+
 -- --------------------------------------------------------
 
 --
@@ -218,8 +225,19 @@ CREATE TABLE `phase` (
   `estimatedStartDate` date NOT NULL,
   `estimatedEndDate` date NOT NULL,
   `actualStartDate` date NOT NULL,
-  `actualEndDate` date NOT NULL
+  `actualEndDate` date NOT NULL,
+  `status` varchar(25) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `phase`
+--
+
+INSERT INTO `phase` (`phaseID`, `projectID`, `taskName`, `estimatedCost`, `actualCost`, `estimatedStartDate`, `estimatedEndDate`, `actualStartDate`, `actualEndDate`, `status`) VALUES
+(1, 7, 'task1', '235335', '345355', '2017-03-15', '2017-03-24', '2017-03-01', '2017-03-30', 'Complete'),
+(2, 7, 'task2', '3322', '3328', '2017-03-02', '2017-03-16', '2017-03-04', '2017-03-15', 'Complete'),
+(3, 7, 'task3', '8999', '7898', '2017-03-15', '2017-03-23', '2017-03-10', '2017-03-22', 'In Progress'),
+(4, 7, 'task4', '8686', '5938', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 'Not Started');
 
 -- --------------------------------------------------------
 
@@ -246,7 +264,8 @@ CREATE TABLE `project` (
 INSERT INTO `project` (`projectID`, `projectName`, `projectManagerID`, `startDate`, `endDate`, `siteAddress`, `status`, `estimatedCost`, `actualCost`) VALUES
 (1, 'Rajwinders Dog House', 3, '2015-12-17', '2017-03-28', '4931 Wilferem', 'InProgress', '10000000', '0'),
 (2, 'Rajwinders Slave House', 7, '2016-10-01', '2018-05-29', '4931 Wilferem', 'InProgress', '100', '125'),
-(3, 'Rajwinders Sacrifice House', 7, '2017-11-01', '2018-08-06', '4931 Wilferem', 'InProgress', '10100', '125000');
+(3, 'Rajwinders Sacrifice House', 7, '2017-11-01', '2018-08-06', '4931 Wilferem', 'InProgress', '10100', '125000'),
+(7, 'jjT', 7, '2017-03-02', '2017-03-31', 'testtest', 'Completed', '35353', '3265654');
 
 -- --------------------------------------------------------
 
@@ -261,6 +280,13 @@ CREATE TABLE `supplier` (
   `phoneNumber` varchar(30) NOT NULL,
   `email` varchar(30) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `supplier`
+--
+
+INSERT INTO `supplier` (`supplierID`, `supplierName`, `contactPerson`, `phoneNumber`, `email`) VALUES
+(1, 'Derpwinder Corp.', 'Derpingwinder Jr', '(555)555-5555', 'derping@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -327,7 +353,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `payments`
 --
@@ -337,12 +363,12 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `projectID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `projectID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `supplier`
-  MODIFY `supplierID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `supplierID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -12,12 +12,12 @@ $actualStartDate = $_POST['actualStartDate'];
 $actualEndDate = $_POST['actualEndDate'];
 $status = $_POST['status'];
 
-$query =  'INSERT INTO Phase (phaseID, projectID, taskName, estimatedCost, actualCost, estimatedStartDate, estimatedEndDate, actualStartDate, status,
-actualEndDate, status) VALUES ("5","'.$projectID.'","'.$phaseName.'","'.$estimatedCost.'","'.$actualCost.'","'.$estStartDate.'",
-"'.$estEndDate.'","'.$actualStartDate.'","'.$actualEndDate.'","'.$status.'")';
+$query =  "INSERT INTO Phase (phaseID, projectID, taskName, estimatedCost, actualCost, estimatedStartDate, estimatedEndDate, actualStartDate,
+actualEndDate, status) VALUES ('5','".$projectID."','".$phaseName."','".$estimatedCost."','".$actualCost."','".$estStartDate."','".$estEndDate."','".$actualStartDate."','".$actualEndDate."','".$status."')";
+
 //$results = mysqli_query($query, $connection);
 $connection->query($query);
-echo $query;
+print_r($query);
 
 //mysqli_free_result($results);
 mysqli_close($connection);

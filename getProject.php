@@ -4,16 +4,16 @@
 <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <style>
 table {
-    width: 100%;
     border-collapse: collapse;
+    width: 100%;
 }
 
-table, td, th {
-    border: 1px solid black;
-    padding: 5px;
+th, td {
+    text-align: left;
+    padding: 8px;
 }
 
-th {text-align: left;}
+tr:nth-child(even){background-color: #f2f2f2}
 </style>
 </head>
 <body>

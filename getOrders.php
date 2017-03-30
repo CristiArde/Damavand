@@ -3,16 +3,16 @@
 <head>
 <style>
 table {
-    width: 100%;
     border-collapse: collapse;
+    width: 100%;
 }
 
-table, td, th {
-    border: 1px solid black;
-    padding: 5px;
+th, td {
+    text-align: left;
+    padding: 8px;
 }
 
-th {text-align: left;}
+tr:nth-child(even){background-color: #f2f2f2}
 </style>
 </head>
 <body>
@@ -23,11 +23,12 @@ $type = $_GET['type'];	//get Orders based on Projects OR Phases. Type = Project 
 
 require 'connection.php';
 if($type = "Project"){
-	$sql="SELECT orderID, (Select supplierName from supplier s, project p, orders o WHERE s.supplierID = o.supplierID AND o.projectID =  p.projectID = '".$id."') as supplierName,totalCost, orderDate, estimatedDeliveryDate FROM Orders WHERE projectID = '".$id."'";
+	$sql="SELECT orderID, phaseID, (Select supplierName from supplier s, project p, orders o WHERE s.supplierID = o.supplierID AND o.projectID =  p.projectID = '".$id."') as supplierName,totalCost, orderDate, estimatedDeliveryDate FROM Orders WHERE projectID = '".$id."'";
 	$result = mysqli_query($connection,$sql);		//TO DO FROM HERE
 	echo "<table>
 	<tr>
 	<th>Order Number</th>
+	<th>Phase Number</th>
 	<th>Supplier</th>
 	<th>Total Cost</th>
 	<th>Date Ordered</th>
@@ -37,6 +38,7 @@ if($type = "Project"){
 	while($row = mysqli_fetch_array($result)) {
 	    echo "<tr>";
 	    echo "<td>" . $row['orderID'] . "</td>";
+	    echo "<td>" . $row['phaseID'] . "</td>";
 	    echo "<td>" . $row['supplierName'] . "</td>";
 	    echo "<td>" . $row['totalCost'] . "</td>";
 	    echo "<td>" . $row['orderDate'] . "</td>";

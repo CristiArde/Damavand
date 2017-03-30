@@ -64,8 +64,8 @@ while($row = mysqli_fetch_array($result)) {
 		echo "<td> TBA </td>";
 	echo '<td><input id="ordersBtn" onclick="showOrders('.$row['projectID'].')" type="button" value="Order Details"></td>';
 	echo '<td>
-		<form action="/Damavand/projectDetails.php">
-		  <input type="hidden" value = "'.$row['projectID'].'">
+		<form action="/Damavand/projectDetails.php" method="POST">
+		  <input name="projectID" type="hidden" value = "'.$row['projectID'].'">
 		  <input type="submit" value="More Information">
 		</form> 
 	</td>';

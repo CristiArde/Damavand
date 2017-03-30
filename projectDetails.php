@@ -14,7 +14,7 @@
 require'connection.php';
 session_start();
 
-$projectID = 7; #needs the value of current poject id from other pages
+$projectID = $_POST['projectID']; #needs the value of current poject id from other pages
 
 $phases = array();
 $query =  'select phaseID, taskName, estimatedCost, actualCost, estimatedStartDate, estimatedEndDate, actualStartDate, status,

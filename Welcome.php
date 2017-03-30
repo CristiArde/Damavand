@@ -61,14 +61,10 @@ session_start();
 
 		foreach ($_SESSION['ProjectID'] as $value) {
 		 echo '<option value="'.$value['projectID'].'">Project '.$value['projectID'].'</option>';
-			
 		}?>
 		</select>
 		<div id="txtHint"><b>Project Informaiton Will be Displayed Here</b></div>
 		<div id="txtHint2"></div>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript">
-</script>
 	</body>
 
 	

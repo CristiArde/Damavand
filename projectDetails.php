@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Project Details</title>
 </head>
 <body>
 	<table>
@@ -25,7 +25,9 @@ echo "This section contains detailed information on each phase. You may proceed 
 ?>
 </tr></td>
 <tr><td>
+<form action="/Damavand/addPhase.html" method="POST">
 <button type="submit">Add A Phase</button>
+</form>
 </tr></td>
 <tr><td>
 <table>

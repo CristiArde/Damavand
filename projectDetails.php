@@ -14,15 +14,15 @@
 require'connection.php';
 session_start();
 
-//$projectID = $_POST['projectID']; #needs the value of current poject id from other pages
-$projectID = 7;
+$projectID = $_POST['projectID']; #needs the value of current poject id from other pages
+//$projectID = 7;
 
 $newPhaseIDQuery =  'SELECT MAX(phaseID) as newIDPhase from Phase where projectID ="'.$projectID.'"';
 $result = mysqli_query($connection, $newPhaseIDQuery);
 $newPhaseID = mysqli_fetch_assoc($result);
 $_SESSION["PhaseIDNew"] = $newPhaseID['newIDPhase'];
 
-$query =  'select phaseID, taskName, estimatedCost, actualCost, estimatedStartDate, estimatedEndDate, actualStartDate, status,
+$query =  'select phaseID, taskName, estimatedCost, actualCost, estimatedStartDate, estimatedEndDate, actualStartDate,
 actualEndDate, status from Phase where projectID ="'.$projectID.'" ORDER BY status';
 $results = mysqli_query($connection, $query);
 
@@ -40,7 +40,7 @@ echo "This section contains detailed information on each phase. You may proceed 
 <?php
 while ($row = mysqli_fetch_assoc($results))
 {
-
+	$_SESSION['phaseID'] = $row['phaseID'];  #for modify phase page
 ?>
 <tr><th>
 <?php
@@ -159,7 +159,14 @@ while ($row = mysqli_fetch_assoc($results))
 <?php } 
 	else{
 ?>
-<button type="submit">Modify Phase</button> <button type="submit">Remove Phase</button> <button type="submit">Order</button> <button type="submit">Payments</button>
+<button type="submit">Modify Phase</button> 
+<button type="submit">Remove Phase</button> 
+<form action="/Damavand/getOrders.php" method="POST">
+	<input name="id" type="hidden" value='"'<?php echo $projectID ?>'"'>
+	<input name="type" type="hidden" value = "Project">
+	<button type="submit">Order</button>
+</form> 
+<button type="submit">Payments</button>
 <?php }?>
 </tr></td>
 <?php

@@ -23,8 +23,8 @@ $type = $_GET['type'];	//get Orders based on Projects OR Phases. Type = Project 
 
 require 'connection.php';
 if($type = "Project"){
-	$sql="SELECT orderID, phaseID, (Select supplierName from supplier s, project p, orders o WHERE s.supplierID = o.supplierID AND o.projectID =  p.projectID = '".$id."') as supplierName,totalCost, orderDate, estimatedDeliveryDate FROM Orders WHERE projectID = '".$id."'";
-	$result = mysqli_query($connection,$sql);		//TO DO FROM HERE
+	$sql="SELECT supplierName , orderID, phaseID,totalCost, orderDate, estimatedDeliveryDate FROM Orders o  INNER JOIN supplier s ON s.supplierID = o.supplierID WHERE projectID = '".$id."'";
+	$result = mysqli_query($connection,$sql);		
 	echo "<table>
 	<tr>
 	<th>Order Number</th>
@@ -35,6 +35,8 @@ if($type = "Project"){
 	<th>Estimate Delivery Date</th>
 	<th></th>
 	</tr>";
+	$count = 0;
+	//$supplierName = "";
 	while($row = mysqli_fetch_array($result)) {
 	    echo "<tr>";
 	    echo "<td>" . $row['orderID'] . "</td>";
@@ -43,13 +45,15 @@ if($type = "Project"){
 	    echo "<td>" . $row['totalCost'] . "</td>";
 	    echo "<td>" . $row['orderDate'] . "</td>";
 	    echo "<td>" . $row['estimatedDeliveryDate'] . "</td>";
-	    echo '<td>
-		<form action="/Damavand/projectDetails.php">
-			  <input type="hidden" value = "'.$row['orderID'].'">
+	   $count += 1;
+	}
+	 echo '<td rowspan="'.$count.'">
+		<form action="/Damavand/getItems.php">
+			  <input name="id" type="hidden" value = "'.$id.'">
+			  <input name="type" type="hidden" value = "Project">
 			  <input type="submit" value="Ordered Items">
 			</form> 
 		</td>';
-	}
 	echo "</table>";
 }
 mysqli_close($connection);

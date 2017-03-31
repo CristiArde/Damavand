@@ -159,8 +159,14 @@ while ($row = mysqli_fetch_assoc($results))
 <?php } 
 	else{
 ?>
+
+<form action="/Damavand/modifyPhase.php" method="POST">
+<input id="Pid" name="Pid" type="hidden" value=<?php echo $projectID ?>>
 <button type="submit">Modify Phase</button> 
+</form>
+
 <button type="submit">Remove Phase</button> 
+
 <form action="/Damavand/getOrders.php" method="GET">
 	<input name="id" id="id" type="hidden" value=<?php echo $projectID ?>>
 	<input name="type" id="type" type="hidden" value = "Project">

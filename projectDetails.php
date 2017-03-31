@@ -161,9 +161,9 @@ while ($row = mysqli_fetch_assoc($results))
 ?>
 <button type="submit">Modify Phase</button> 
 <button type="submit">Remove Phase</button> 
-<form action="/Damavand/getOrders.php" method="POST">
-	<input name="id" type="hidden" value='"'<?php echo $projectID ?>'"'>
-	<input name="type" type="hidden" value = "Project">
+<form action="/Damavand/getOrders.php" method="GET">
+	<input name="id" id="id" type="hidden" value=<?php echo $projectID ?>>
+	<input name="type" id="type" type="hidden" value = "Project">
 	<button type="submit">Order</button>
 </form> 
 <button type="submit">Payments</button>

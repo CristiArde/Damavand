@@ -2,6 +2,7 @@
 require'connection.php';
 session_start();
 
+//$projectID = $_POST['Pidadd'];  //DOESNT WORK
 $projectID = 7;
 $phaseName = $_POST['phaseName'];
 $estimatedCost = $_POST['estCost'];
@@ -18,6 +19,8 @@ $newPhaseID = $retrievePhaseID + 1;
 $query =  "INSERT INTO Phase (phaseID, projectID, taskName, estimatedCost, actualCost, estimatedStartDate, estimatedEndDate, actualStartDate,
 actualEndDate, status) VALUES ('".$newPhaseID."','".$projectID."','".$phaseName."','".$estimatedCost."','".$actualCost."','".$estStartDate."','".$estEndDate."','".$actualStartDate."','".$actualEndDate."','".$status."')";
 $connection->query($query);
+
+$_SESSION['projectID'] = $projectID;
 
 mysqli_close($connection);
 header('Location: /Damavand/projectDetails.php');

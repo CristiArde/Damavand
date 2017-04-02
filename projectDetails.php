@@ -14,13 +14,17 @@
 require'connection.php';
 session_start();
 
-$projectID = $_POST['projectID']; #needs the value of current poject id from other pages
-//$projectID = 7;
+if(@$_POST['projectID'] == "")
+	$projectID = $_SESSION['projectID'];
+else
+	$projectID = $_POST['projectID']; #needs the value of current poject id from other pages
+
 
 $newPhaseIDQuery =  'SELECT MAX(phaseID) as newIDPhase from Phase where projectID ="'.$projectID.'"';
 $result = mysqli_query($connection, $newPhaseIDQuery);
 $newPhaseID = mysqli_fetch_assoc($result);
 $_SESSION["PhaseIDNew"] = $newPhaseID['newIDPhase'];
+$_SESSION["projectID"] = $projectID;  #TRYING TO PUT PROJECT ID IN SESSION, DOESNT WORK EITHER
 
 $query =  'select phaseID, taskName, estimatedCost, actualCost, estimatedStartDate, estimatedEndDate, actualStartDate,
 actualEndDate, status from Phase where projectID ="'.$projectID.'" ORDER BY status';
@@ -31,6 +35,7 @@ echo "This section contains detailed information on each phase. You may proceed 
 </tr></td>
 <tr><td>
 <form action="/Damavand/addPhase.html" method="POST">
+<input id="Pidadd" name="Pidadd" type="hidden" value=<?php echo $projectID ?>>
 <button type="submit">Add A Phase</button>
 </form>
 </tr></td>

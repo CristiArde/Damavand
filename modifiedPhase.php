@@ -3,8 +3,7 @@ require'connection.php';
 session_start();
 
 $phaseID = $_SESSION['phaseID'];
-//$projectID = $_POST['projectID'];  //THIS WORKS
-$projectID = 7;  //temporary
+$projectID = $_SESSION['projectID']; //THIS WORKS
 $phaseName = $_POST["phaseName"];
 $estCost = $_POST["estCost"];
 $actualCost = $_POST["actualCost"];

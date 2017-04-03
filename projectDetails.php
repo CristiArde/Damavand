@@ -24,7 +24,7 @@ $newPhaseIDQuery =  'SELECT MAX(phaseID) as newIDPhase from Phase where projectI
 $result = mysqli_query($connection, $newPhaseIDQuery);
 $newPhaseID = mysqli_fetch_assoc($result);
 $_SESSION["PhaseIDNew"] = $newPhaseID['newIDPhase'];
-$_SESSION["projectID"] = $projectID;  #TRYING TO PUT PROJECT ID IN SESSION, DOESNT WORK EITHER
+$_SESSION['projectID'] = $projectID;  #TRYING TO PUT PROJECT ID IN SESSION, DOESNT WORK EITHER
 
 $query =  'select phaseID, taskName, estimatedCost, actualCost, estimatedStartDate, estimatedEndDate, actualStartDate,
 actualEndDate, status from Phase where projectID ="'.$projectID.'" ORDER BY status';
@@ -35,7 +35,7 @@ echo "This section contains detailed information on each phase. You may proceed 
 </tr></td>
 <tr><td>
 <form action="/Damavand/addPhase.html" method="POST">
-<input id="Pidadd" name="Pidadd" type="hidden" value=<?php echo $projectID ?>>
+<input id="Pidadd" name="Pidadd" type="hidden" value='"'<?php echo $projectID ?>'"'>
 <button type="submit">Add A Phase</button>
 </form>
 </tr></td>

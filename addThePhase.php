@@ -2,8 +2,8 @@
 require'connection.php';
 session_start();
 
-//$projectID = $_POST['Pidadd'];  //DOESNT WORK
-$projectID = 7;
+$projectID = $_SESSION['projectID'];  
+
 $phaseName = $_POST['phaseName'];
 $estimatedCost = $_POST['estCost'];
 $actualCost = $_POST['actualCost'];

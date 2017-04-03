@@ -9,8 +9,7 @@ require'connection.php';
 session_start();
 
 $phaseID = $_SESSION['phaseID'];
-//$projectID = $_POST['Pid'];  //DOESNT WORK
-$projectID = 7 ;  //temporary solution
+$projectID = $_SESSION['projectID'];  //DOESNT WORK
 
 $_SESSION['phaseID'] = $phaseID;
 $_SESSION['pID'] = $projectID; #not needed if the hidden PID works

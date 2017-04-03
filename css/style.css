@@ -3,7 +3,7 @@ body {
 
 .center {
   /*text-align: center;*/
-  width: 1000px;
+  width: 800px;
   margin: 0 auto;	
 }
 
@@ -14,6 +14,8 @@ h1 {
 h3 {
 	text-align: center;
 }
+
+
 /*Begin index.php*/
 #login-table {
 	width: 300px;
@@ -100,3 +102,33 @@ h3 {
 
 }
 /*End projectDetails.php*/
+
+
+/*Begin modifyPhase.php*/
+#modify-phase-table {
+    width: 60%;
+}
+
+#modify-phase-table td {
+    width: 50%;
+}
+
+#modify-phase-table input {
+    width: 100%;
+}
+/*End modifyPhase.php*/
+
+
+/*Begin addPhase.php*/
+#add-phase-table {
+    width: 60%;
+}
+
+#add-phase-table td {
+    width: 50%;
+}
+
+#add-phase-table input {
+    width: 100%;
+}
+/*End addPhase.php*/

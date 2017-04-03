@@ -45,27 +45,11 @@ session_start();
 			  xmlhttp.send();
 			}
 		</script>
-		<title>The Home Page</title>
-		<link href="style.css" rel="stylesheet" type="text/css">
+		<title>Project Management</title>
+		<link href="css/style.css" rel="stylesheet" type="text/css">
 	</head>
-	<body onload="ddlFunction()">
-		<div id="profile">
-		<b id="welcome">Welcome : <i><?php echo $_SESSION['username']; ?></i></b>
-		</div>
-		<div id="logout">
-		<b id="logout"><a href="logout.php">Log Out</a></b>
-		</div>
-		<select id='dropdown' onchange="showProject(this.value)">
-		<option value="">Select a Project </option>
-		<?php
-
-		foreach ($_SESSION['ProjectID'] as $value) {
-		 echo '<option value="'.$value['projectID'].'">Project '.$value['projectID'].'</option>';
-		}?>
-		</select>
-		<div id="txtHint"><b>Project Informaiton Will be Displayed Here</b></div>
-		<div id="txtHint2"></div>
-	</body>
-
-	
+	<?php
+	$page_content = 'content/welcome_content.php';
+	include('master.php');	
+	?>	
 </html>

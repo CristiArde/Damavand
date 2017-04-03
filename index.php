@@ -22,7 +22,7 @@ if(isset($_POST['btn_Login']))
 			$_SESSION['ProjectID'] = $projectID;
 
 			//print_r( $_SESSION['ProjectID']);
-			$Url = 'Welcome.php';
+			$Url = 'welcome.php';
 		}
 		else
 		{
@@ -34,29 +34,15 @@ if(isset($_POST['btn_Login']))
 	else
 		echo "Invalid Account";
 }
-
-
 ?>
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>Login</title>
-		<link href="style.css" rel="stylesheet" type="text/css">
+		<link href="css/style.css" rel="stylesheet" type="text/css">
 	</head>
-	
-	<body>
-		<div id="main">
-			<h1>Damavand Construction INC.</h1>
-		<div id="login">
-		<h2>Login Form</h2>
-			<form action="" method="post">
-				<label>UserName :</label>
-				<input id="name" name="username" type="text">
-				<label>Password :</label>
-				<input id="password" name="password" type="password">
-				<input name="btn_Login" type="submit" value="Login">
-			</form>
-		</div>
-		</div>
-	</body>
+	<?php 
+	$page_content = 'content/index_content.php';
+	include('master.php');
+	?>
 </html>

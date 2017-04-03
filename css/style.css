@@ -1,0 +1,102 @@
+body {
+ }
+
+.center {
+  /*text-align: center;*/
+  width: 1000px;
+  margin: 0 auto;	
+}
+
+h1 {
+ text-align: center;
+}
+
+h3 {
+	text-align: center;
+}
+/*Begin index.php*/
+#login-table {
+	width: 300px;
+	text-align: left;
+}
+
+#login-table td {
+	width: 50%;
+}
+
+#login-table tr th h2 {
+	text-align: center;
+}
+
+#btn-login {
+	width: 100%;
+}
+/*End index.php*/
+
+
+/*Begin Welcome.php*/
+#auth-main {
+	text-align: left;
+}
+
+#project-info {
+	margin-top: 10px;
+}
+/*End Welcome.php*/
+
+
+/*Begin getProject.php*/
+#project-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#project-table th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+#project-table tr:nth-child(even) {
+	background-color: #f2f2f2
+}
+/*End getProject.php*/
+
+
+/*Begin getOrders.php*/
+#order-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#order-table th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+#order-table tr:nth-child(even) {
+	background-color: #f2f2f2
+}
+/*End getOrders.php*/
+
+
+/*Begin getItems.php*/
+#items-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#items-table th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+#items-table tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+/*End getItems.php*/
+
+/*Begin projectDetails.php*/
+#project-details-main {
+
+}
+/*End projectDetails.php*/

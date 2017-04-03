@@ -170,8 +170,9 @@ while ($row = mysqli_fetch_assoc($results))
 <button type="submit">Modify Phase</button> 
 </form>
 
+<form action="/Damavand/removePhase.php" method="POST">
 <button type="submit">Remove Phase</button> 
-
+</form>
 <form action="/Damavand/getOrders.php" method="GET">
 	<input name="id" id="id" type="hidden" value=<?php echo $projectID ?>>
 	<input name="type" id="type" type="hidden" value = "Project">

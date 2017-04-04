@@ -1,7 +1,12 @@
 <div id="auth-main" class="center">
 	<h1>Damavand Construction INC.</h1>
 	<h3>Project Management</h3>
-	<p><b id="welcome">Welcome, <i><?php echo $_SESSION['username']; ?></i> (<a id="logout" href="logout.php">Log Out</a>)</b></p>
+			<ul>
+				<li>
+					<button onclick='window.location.reload(true);' class="button button2">Home</button>
+				</li>
+			</ul>
+		<p><b id="welcome">Welcome, <i><?php echo $_SESSION['username']; ?></i> (<a id="logout" href="logout.php">Log Out</a>)</b></p>
 	<table>
 			<tr>
 				<th></th>

@@ -10,6 +10,7 @@
     $result = mysqli_query($connection,$sql);   
     echo '<h1>Damavand Construction INC.</h1>';
     echo '<h3>Items Ordered for Project '.$id.'</h3>';  
+
     echo 
     "<table id='items-table'>
         <tr>

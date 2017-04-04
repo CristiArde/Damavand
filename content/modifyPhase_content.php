@@ -17,6 +17,16 @@
     
   ?>
     <h1>Damavand Construction INC.</h1>
+    
+<ul>
+    <li>
+      <button onclick="location.href ='Welcome.php';" class="button button2">Home</button>
+      >>
+      <button onclick="location.href ='projectDetails.php';" class="button button2">Project Details</button>
+      >>
+      <button onclick='window.location.reload(true);' class="button button2">Modify Phase</button> 
+    </li>
+  </ul>
     <h3>Modify Project <?php echo $projectID.' Phase '.$phaseID ?></h3>
     <form action="modifiedPhase.php" method="POST">
       <input type="hidden" name="PID" id="PID" value=<?php echo $projectID ?>/> <!--  THIS DOESNT WORK   -->

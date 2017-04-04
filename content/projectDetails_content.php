@@ -1,6 +1,13 @@
 <div id="project-details-main" class="center">
 	<h1>Damavand Construction INC.</h1>
 	<h3>Project Details and Phases</h3>
+	<ul>
+		<li>
+			<button onclick="location.href ='Welcome.php';" class="button button2">Home</button>
+			>>
+			<button onclick='window.location.reload(true);' class="button button2">Project Details</button> 
+		</li>
+	</ul>
 	<table>
 		<tr>
 			<td>

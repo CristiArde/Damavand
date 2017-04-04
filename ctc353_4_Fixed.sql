@@ -16,11 +16,17 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+
+
 --
 -- Database: `ctc353_4`
 --
 
--- --------------------------------------------------------
+DROP DATABASE ctc353_4;
+
+CREATE DATABASE ctc353_4;
+
+USE ctc353_4;
 
 --
 -- Table structure for table `companystaff`

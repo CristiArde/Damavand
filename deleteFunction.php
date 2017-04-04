@@ -19,17 +19,14 @@
                 unset($_SESSION['ProjectID'][$key]);
                 print_r($_SESSION['ProjectID']);
             }
-            mysqli_query($connection,$sql);
-            mysqli_close($connection);
-            header('Location: /Damavand/welcome.php');
         }
     }else if($type=='Task'){
         //primary key =  concatination of projectID,phaseID & taskID
-        print_r($id);
-        $sql = "DELETE FROM TASK WHERE CONCAT(taskID,phaseID,projectID) = ".$id;
-        mysqli_query($connection,$sql);
-        mysqli_close($connection);
-        header('Location: /Damavand/task.php');
+        $sql = "DELETE FROM TASK WHERE CONCAT(projectID,phaseID,taskID) = '".$id."'";
     }
+    
+    mysqli_query($connection,$sql);
+    mysqli_close($connection);
+    header('Location: /Damavand/welcome.php');
     ?>
 </div>

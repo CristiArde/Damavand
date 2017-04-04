@@ -7,13 +7,12 @@
     require 'connection.php';
     session_start();
     $id = $_POST['id'];
-<<<<<<< HEAD
-    $oid = $_POST['oid'];
     $type = $_POST['type'];
 
     if($type=='Project'){
         $sql="SELECT projectID as 'Project Number', projectName as 'Project Name', projectManagerID as 'Project Manager ID', customerID as 'Customer ID', startDate as 'Start Date', endDate as 'End Date', siteAddress as 'Address', status as 'Status', estimatedCost as 'Estimated Cost', actualCost as 'Actual Cost' FROM Project WHERE projectID = '".$id."'";
     }else if($type=='Order'){
+        $oid = $_POST['oid'];
         $sql="SELECT orderID as 'Order Number', projectID as 'Project Number', phaseID as 'Phase Number', taskID as 'Task Number', supplierID as 'Supplier ID', totalCost as 'Total Cost', orderDate as 'Order Date', estimatedDeliveryDate as 'Estimated Delivery Date' FROM Orders WHERE projectID = '".$id."' AND orderID = '".$oid."'";
     }else if($type=='Task'){
         //primary key =  concatination of projectID,phaseID & taskID
@@ -50,25 +49,6 @@
     }
 
     //print_r($fieldType);
-=======
-    $type = $_POST['type'];
-    
-    if($type=='Project'){
-        $sql="SELECT * FROM Project WHERE projectID = '".$id."'";
-    }else if($type=='Order'){
-        $sql="SELECT * FROM Orders WHERE orderID = '".$id."'";
-    }else if($type=='Task'){
-        //primary key =  concatination of projectID,phaseID & taskID
-        $sql ="SELECT * FROM `task` where CONCAT(projectID,phaseID,taskID) = '".$id."'";
-    }
-    
-    $result = mysqli_query($connection,$sql);
-    $resultArray = mysqli_fetch_array($result);
-    //$fieldCount = mysqli_num_fields($result);
-    $fields = mysqli_fetch_fields($result);
-    //print_r($fieldCount);
-    //print_r($result); 
->>>>>>> origin/master
     echo '<h1>Damavand Construction INC.</h1>';
     echo '<h3>Modify '.$type.'</h3>';  
     echo 
@@ -77,7 +57,6 @@
             <th>Attribute Names</th>
             <th>Values</th>
         </tr>";
-<<<<<<< HEAD
     for($x = 0; $x < $fieldCount; $x++){
         echo "<tr>";
         //Decide Input type
@@ -95,24 +74,6 @@
         echo "<td>".$inputType."value=".$valueArray[$x]." id=".$fieldOrig[$x]." name=".$fieldOrig[$x].">"."</td>";
         echo "</tr>";
     }
-=======
-    $count = 0;
-    $supplierName = "";
-    echo "<tr>";
-    foreach($resultArray as $column => $value) {
-          echo "<td>" .$column . " " . $value. "</td>";
-        
-        /*echo "<td>" . $row['projectID'] . "</td>";
-        echo "<td>" . $row['phaseID'] . "</td>";
-        echo "<td>" . $row['orderID'] . "</td>";
-        echo "<td>" . $row['supplierName'] . "</td>";
-        echo "<td>" . $row['itemName'] . "</td>";
-        echo "<td>$" . $row['unitCost'] . "</td>";
-        echo "<td>" . $row['quantity'] . "</td>";
-       $count += 1;*/
-    }
-    echo "</tr>";
->>>>>>> origin/master
     echo "</table>";
     mysqli_close($connection);
     ?>

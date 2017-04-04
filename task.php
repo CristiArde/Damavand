@@ -22,7 +22,11 @@ if(@$_POST['projectID'] == "")
 else
 	$projectID = $_POST['projectID']; #needs the value of current poject id from other pages
 
-$phaseID = $_POST['submitPID'];
+if($_POST['submitPID'] == "")
+	$phaseID = $_POST['id'];
+else
+	$phaseID = $_POST['submitPID']; 
+
 $_SESSION['phaseID'] = $phaseID;
 
 $query =  'select taskID, taskName, estimatedStartDate, actualStartDate, estimatedCost, estimatedEndDate, actualEndDate, 

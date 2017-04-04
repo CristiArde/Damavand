@@ -164,10 +164,10 @@ else
 		} else {
 		?>
 			<form action="modifyFunction.php" method="POST">
-				<button type="submit" name="submitPID" value=<?php echo $row['taskID'] ?>>Modify Task</button>
+				<button type="submit" name="submitPID" value=<?php echo $row['taskID'].$row['phaseID'].$row['taskID']; ?>>Modify Task</button>
 			</form>
-			<form action="/Damavand/removePhase.php" method="POST">
-				<button type="submit" name="submitTID" value=<?php echo $row['taskID'] ?>>Remove Task</button>
+			<form action="/Damavand/deleteFunction.php" method="POST">
+				<button type="submit" name="submitTID" value=<?php echo $row['taskID'].$row['phaseID'].$row['taskID']; ?>>Remove Task</button>
 			</form>
 		<?php 
 		} #if condition brace

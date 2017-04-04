@@ -17,6 +17,7 @@ if($type = "Project"){
 			<th>Date Ordered</th>
 			<th>Estimate Delivery Date</th>
 			<th></th>
+			<th></th>
 		</tr>";
 	$count = 0;
 	//$supplierName = "";
@@ -31,6 +32,13 @@ if($type = "Project"){
 	    echo "<td>" . $row['totalCost'] . "</td>";
 	    echo "<td>" . $row['orderDate'] . "</td>";
 	    echo "<td>" . $row['estimatedDeliveryDate'] . "</td>";
+	    echo '<td> <form action="modifyFunction.php" method="POST">
+					  <input name="type" type="hidden" value = "Order">
+					  <input name="id" type="hidden" value = '.$id.'>
+					  <input name="oid" type="hidden" value = '.$row['orderID'].'>
+					  <input type="submit" '.$enableDisable.' value="Modify Order">
+					</form>
+			</td>';
 	   $count += 1;
 	}
 	 echo '<td rowspan="'.$count.'">

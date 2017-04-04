@@ -48,8 +48,19 @@ while($row = mysqli_fetch_array($result)) {
 		echo "<td>$" . $row['actualCost'] . "</td>";
 	else
 		echo "<td> TBA </td>";
-	echo '<td><input id="ordersBtn" onclick="showOrders('.$row['projectID'].')" type="button" value="Order Details"></td>';
 	echo '<td>
+		<form action="modifyFunction.php" method="POST">
+		  <input name="type" type="hidden" value = "Project">
+		  <input name="id" type="hidden" value = '.$row['projectID'].'>
+		  <input type="submit" value="Modify Project">
+		</form>
+		<form action="deleteFunction.php" method="POST">
+		<input name="type" id="id" type="hidden" value = "Project">
+		  <input name="id" id="id" type="hidden" value = '.$row['projectID'].'>
+		  <input type="submit" value="Delete Project">
+		</form>
+	</td>';
+	echo '<td><input id="ordersBtn" onclick="showOrders('.$row['projectID'].')" type="button" value="Order Details">
 		<form action="projectDetails.php" method="POST">
 		  <input name="projectID" type="hidden" value = "'.$row['projectID'].'">
 		  <input type="submit" value="'.$buttonVal.'">

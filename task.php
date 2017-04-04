@@ -23,7 +23,7 @@ else
 	$projectID = $_POST['projectID']; #needs the value of current poject id from other pages
 
 if(@$_POST['submitPID'] == "")
-	$phaseID = $_POST['id'];
+	$phaseID = $_SESSION['phaseID'];
 else
 	$phaseID = $_POST['submitPID']; 
 

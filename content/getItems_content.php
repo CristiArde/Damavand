@@ -1,6 +1,7 @@
 
 <div id='items-main' class='center'>
     <?php
+    session_start();
     $id = $_GET['id'];
     //$type = $_GET['type'];
     require 'connection.php';

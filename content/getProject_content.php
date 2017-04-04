@@ -1,8 +1,9 @@
 <?php
+session_start();
 $id = intval($_GET['id']);
 
 require 'connection.php';
-
+$_SESSION['projectID'] = $id;
 $sql="SELECT * FROM project WHERE projectID = '".$id."'";
 $sql2 = "SELECT s.firstName, s.lastName FROM companyStaff s, project p WHERE s.staffID = p.projectManagerID AND p.projectID = '".$id."'";
 $result = mysqli_query($connection,$sql);
@@ -24,6 +25,10 @@ echo
 		<th></th>
 	</tr>";
 while($row = mysqli_fetch_array($result)) {
+	if($row['status']=='Complete')
+		$buttonVal = 'More Information';
+	else
+		$buttonVal = 'Update Project';
     echo "<tr>";
     echo "<td> Project " . $row['projectID'] . "</td>";
     echo "<td>" . $row['projectName'] . "</td>";
@@ -47,7 +52,7 @@ while($row = mysqli_fetch_array($result)) {
 	echo '<td>
 		<form action="projectDetails.php" method="POST">
 		  <input name="projectID" type="hidden" value = "'.$row['projectID'].'">
-		  <input type="submit" value="More Information">
+		  <input type="submit" value="'.$buttonVal.'">
 		</form> 
 	</td>';
     echo "</tr>";

@@ -5,8 +5,6 @@ session_start();
 $projectID = $_SESSION['projectID'];  
 
 $phaseName = $_POST['phaseName'];
-$estimatedCost = $_POST['estCost'];
-$actualCost = $_POST['actualCost'];
 $estStartDate = $_POST['estStartDate'];
 $estEndDate = $_POST['estEndDate'];
 $actualStartDate = $_POST['actualStartDate'];
@@ -16,8 +14,8 @@ $retrievePhaseID = $_SESSION['PhaseIDNew'];
 
 $newPhaseID = $retrievePhaseID + 1;
 
-$query =  "INSERT INTO Phase (phaseID, projectID, taskName, estimatedCost, actualCost, estimatedStartDate, estimatedEndDate, actualStartDate,
-actualEndDate, status) VALUES ('".$newPhaseID."','".$projectID."','".$phaseName."','".$estimatedCost."','".$actualCost."','".$estStartDate."','".$estEndDate."','".$actualStartDate."','".$actualEndDate."','".$status."')";
+$query =  "INSERT INTO Phase (phaseID, projectID, phaseName, estimatedStartDate, estimatedEndDate, actualStartDate,
+actualEndDate, status) VALUES ('".$newPhaseID."','".$projectID."','".$phaseName."','".$estStartDate."','".$estEndDate."','".$actualStartDate."','".$actualEndDate."','".$status."')";
 $connection->query($query);
 
 $_SESSION['projectID'] = $projectID;

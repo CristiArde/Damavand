@@ -19,14 +19,6 @@
           <td><input type="text" name="phaseName"/></td>
         </tr>
         <tr>
-          <td>Estimated Cost: </td>
-          <td><input type="text" name="estCost"/></td>
-        </tr>
-        <tr>
-          <td>Actual Cost: </td>
-          <td><input type="text" name="actualCost"/></td>
-        </tr>
-        <tr>
           <td>Estimated Start Date: </td>
           <td><input type="date" name="estStartDate"/></td>
         </tr>

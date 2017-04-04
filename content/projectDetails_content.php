@@ -20,7 +20,7 @@
 				$_SESSION["PhaseIDNew"] = $newPhaseID['newIDPhase'];
 				$_SESSION['projectID'] = $projectID;  #TRYING TO PUT PROJECT ID IN SESSION, DOESNT WORK EITHER
 
-				$query =  'select phaseID, taskName, estimatedCost, actualCost, estimatedStartDate, estimatedEndDate, actualStartDate,
+				$query =  'select phaseID,phaseName, estimatedStartDate, estimatedEndDate, actualStartDate,
 				actualEndDate, status from Phase where projectID ="'.$projectID.'" ORDER BY status';
 				$results = mysqli_query($connection, $query);
 
@@ -43,6 +43,11 @@
 					while ($row = mysqli_fetch_assoc($results))
 					{
 						$_SESSION['phaseID'] = $row['phaseID'];  #for modify phase page
+						$query2 = 'select SUM(estimatedCost) as "estimatedCost", SUM(actualCost) as "actualCost" from TASK t WHERE t.projectID = "'.$_SESSION['projectID'].'" AND t.phaseID = "'.$row['phaseID'].'"';
+				        $result2 = mysqli_query($connection, $query2);
+				        $costArray = mysqli_fetch_assoc($result2);
+				    
+
 					?>
 					<tr>
 						<th colspan="2">
@@ -75,21 +80,21 @@
 					</tr>
 					<tr>
 						<td>Phase Name: </td>
-						<td><?php echo $row['taskName']; ?></td>
+						<td><?php echo $row['phaseName']; ?></td>
 					</tr>
 					<tr>
 						<td>Estimated Cost: </td>
-						<td><?php echo '$'.$row['estimatedCost']; ?></td>
+						<td><?php echo '$'.$costArray['estimatedCost']; ?></td>
 					</tr>
 					<tr>
 						<?php
 						if($row['status'] == "Complete") {
 							echo '<td>Actual Cost: </td>';
-							echo '<td>$'.$row['actualCost'].'</td>';
+							echo '<td>$'.$costArray['actualCost'].'</td>';
 						}	
 						else if($row['status'] == "In Progress") {
 							echo '<td>Actual Cost so far: </td>';
-							echo '<td>$'.$row['actualCost'].'</td>'; 
+							echo '<td>$'.$costArray['actualCost'].'</td>'; 
 						}		
 						else {
 							echo '<td>Actual Cost: </td>';
@@ -101,7 +106,7 @@
 						<td>Expenses (Actual Cost - Estimated Cost): </td>
 						<td>
 							<?php
-							$difference = $row['actualCost'] - $row['estimatedCost'];
+							$difference = $costArray['actualCost'] - $costArray['estimatedCost'];
 							if ($row['status'] == "Not Started")
 								echo 'N/A';
 							else if ($difference > 0)
@@ -199,29 +204,35 @@
 						<td>
 							<?php
 							if($row['status'] == "Complete") {
-							?>
+							?>	<form>
 								<button type="submit" disabled >Modify Phase</button> 
-								<button type="submit" disabled >Remove Phase</button> 
-								<button disabled type="submit">Order</button>
-								<button type="submit">Payments</button>
+								</form>
+								<form>
+								<button type="submit" disabled >Remove Phase</button>
+								</form>
 							<?php 
 							} else {
 							?>
 								<form action="modifyPhase.php" method="POST">
 									<input id="Pid" name="Pid" type="hidden" value=<?php echo $projectID; ?>>
-									<button type="submit">Modify Phase</button> 
+									<button type="submit" name="submitPID" value=<?php echo $row['phaseID'] ?>>Modify Phase</button>
 								</form>
-								<form action="removePhase.php" method="POST">
-									<button type="submit">Remove Phase</button> 
+								<form action="/Damavand/removePhase.php" method="POST">
+									<button type="submit" name="submitPID" value=<?php echo $row['phaseID'] ?>>Remove Phase</button>
 								</form>
-								<form action="getOrders.php" method="GET">
-									<input name="id" id="id" type="hidden" value=<?php echo $projectID; ?>>
-									<input name="type" id="type" type="hidden" value = "Project">
-									<button type="submit">Order</button>
-								</form> 
-								<button type="submit">Payments</button>
 							<?php 
-							} #if condition brace ?>
+							} #if condition brace
+							?>
+							<form action="getOrders.php" method="GET">
+								<input name="id" id="id" type="hidden" value=<?php echo $projectID; ?>>
+								<input name="type" id="type" type="hidden" value = "Project">
+								<button type="submit">Order</button>
+							</form> 
+							<form action="/Damavand/task.php" method="POST">
+								<button type="submit" name="submitPID" value=<?php echo $row['phaseID'] ?>>Tasks</button>
+							</form>
+
+							<button type="submit">Payments</button>
 						</td>
 					</tr>
 					<?php } #while condition brace ?>

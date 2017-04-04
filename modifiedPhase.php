@@ -5,8 +5,6 @@ session_start();
 $phaseID = $_SESSION['phaseID'];
 $projectID = $_SESSION['projectID']; //THIS WORKS
 $phaseName = $_POST["phaseName"];
-$estCost = $_POST["estCost"];
-$actualCost = $_POST["actualCost"];
 $estStartDate = $_POST["estStartDate"];
 $estEndDate = $_POST["estEndDate"];
 $actualStartDate = $_POST["actualStartDate"];
@@ -15,7 +13,7 @@ $status = $_POST["status"];
 
 echo $phaseID;
 
- $query =  'UPDATE Phase SET taskName = "'.$phaseName.'",estimatedCost = "'.$estCost.'",actualCost = "'.$actualCost.'",estimatedStartDate = "'.$estStartDate.'",
+ $query =  'UPDATE Phase SET phaseName = "'.$phaseName.'",estimatedStartDate = "'.$estStartDate.'",
  estimatedEndDate = "'.$estEndDate.'", actualStartDate = "'.$actualStartDate.'",actualEndDate = "'.$actualEndDate.'",
  status = "'.$status.'" where projectID ="'.$projectID.'" AND phaseID = "'.$phaseID.'"';
 $connection->query($query);

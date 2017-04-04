@@ -4,17 +4,17 @@
   require'connection.php';
   session_start();
 
-  $phaseID = $_SESSION['phaseID'];
+  $phaseID = $_POST['submitPID'];
   $projectID = $_SESSION['projectID'];  //DOESNT WORK
 
   $_SESSION['phaseID'] = $phaseID;
   $_SESSION['pID'] = $projectID; #not needed if the hidden PID works
 
-    $query =  'select taskName, estimatedCost, actualCost, estimatedStartDate, estimatedEndDate, actualStartDate,
+    $query =  'select phaseName, estimatedStartDate, estimatedEndDate, actualStartDate,
     actualEndDate, status from Phase where projectID ="'.$projectID.'" AND phaseID = "'.$phaseID.'"';
     $results = mysqli_query($connection, $query);
     $row = mysqli_fetch_assoc($results);
-
+    
   ?>
     <h1>Damavand Construction INC.</h1>
     <h3>Modify Project <?php echo $projectID.' Phase '.$phaseID ?></h3>
@@ -23,15 +23,7 @@
       <table id='modify-phase-table' class='center'>
         <tr>
           <td>Phase Name: </td>
-          <td><input type="text" name="phaseName" value=<?php echo $row['taskName']?>></td>
-        </tr>
-        <tr>
-          <td>Estimated Cost: </td>
-          <td><input type="text" name="estCost" value=<?php echo $row['estimatedCost']?>></td>
-        </tr>
-        <tr>
-          <td>Actual Cost: </td>
-          <td><input type="text" name="actualCost" value=<?php echo $row['actualCost']?>></td>
+          <td><input type="text" name="phaseName" value=<?php echo $row['phaseName']?>></td>
         </tr>
         <tr>
           <td>Estimated Start Date: </td>
@@ -51,7 +43,7 @@
         </tr>
         <tr>
           <td>Current Status (Complete, In Progress, Not Started): </td>
-          <td><input type="text" name="status" value=<?php echo $row['status']?>/></td>
+          <td><input type="text" name="status" value="<?php echo $row['status']?>"/></td>
         </tr>
         <tr>
           <td colspan="2"><input type="submit" value="Submit"></td>

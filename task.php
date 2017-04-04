@@ -22,7 +22,7 @@ if(@$_POST['projectID'] == "")
 else
 	$projectID = $_POST['projectID']; #needs the value of current poject id from other pages
 
-if($_POST['submitPID'] == "")
+if(@$_POST['submitPID'] == "")
 	$phaseID = $_POST['id'];
 else
 	$phaseID = $_POST['submitPID']; 

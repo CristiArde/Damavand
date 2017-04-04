@@ -16,7 +16,7 @@
         $sql="SELECT orderID as 'Order Number', projectID as 'Project Number', phaseID as 'Phase Number', taskID as 'Task Number', supplierID as 'Supplier ID', totalCost as 'Total Cost', orderDate as 'Order Date', estimatedDeliveryDate as 'Estimated Delivery Date' FROM Orders WHERE projectID = '".$id."' AND orderID = '".$oid."'";
     }else if($type=='Task'){
         //primary key =  concatination of projectID,phaseID & taskID
-        $sql ="SELECT taskID as 'Task Number', phaseID as 'Phase Number', projectID as 'Project Number', taskName as 'Task Name', estimatedStartDate as 'Estimated Start Date', actualStartDate as 'Actual Start Date', estimatedCost as 'Estimated Cost', estimatedEndDate as 'Estimated End Date', actualEndDate as 'Actual End Date', actualCost as 'Actual Cost', status as 'Status' FROM `task` where CONCAT(projectID,phaseID,taskID) = '".$id."'";
+        $sql ="SELECT taskID as 'Task Number', phaseID as 'Phase Number', projectID as 'Project Number', taskName as 'Task Name', estimatedStartDate as 'Estimated Start Date', actualStartDate as 'Actual Start Date', estimatedCost as 'Estimated Cost', estimatedEndDate as 'Estimated End Date', actualEndDate as 'Actual End Date', actualCost as 'Actual Cost', status as 'Status' FROM `task` where CONCAT(taskID,phaseID,projectID) = '".$id."'";
     }
     
     $result = mysqli_query($connection,$sql);

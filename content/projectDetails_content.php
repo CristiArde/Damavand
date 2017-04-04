@@ -1,17 +1,8 @@
 <div id="project-details-main" class="center">
 	<h1>Damavand Construction INC.</h1>
 	<h3>Project Details and Phases</h3>
-	<ul>
-		<li>
-			<button onclick="location.href ='Welcome.php';" class="button button2">Home</button>
-			>>
-			<button onclick='window.location.reload(true);' class="button button2">Project Details</button> 
-		</li>
-	</ul>
-	<table>
-		<tr>
-			<td>
-				<?php
+	
+					<?php
 				require'connection.php';
 				session_start();
 
@@ -19,7 +10,19 @@
 					$projectID = $_SESSION['projectID'];
 				else
 					$projectID = $_POST['projectID']; #needs the value of current poject id from other pages
+				?>
+	<ul>
+		<li>
+			<button onclick="location.href ='Welcome.php';" class="button button2">Home</button>
+			>>
+			<button onclick='window.location.reload(true);' class="button button2">Project <?php echo $projectID; ?> Details</button> 
+		</li>
+	</ul>
+	<table>
+		<tr>
+			<td>
 
+			<?php
 
 				$newPhaseIDQuery =  'SELECT MAX(phaseID) as newIDPhase from Phase where projectID ="'.$projectID.'"';
 				$result = mysqli_query($connection, $newPhaseIDQuery);

@@ -22,9 +22,9 @@
     <li>
       <button onclick="location.href ='Welcome.php';" class="button button2">Home</button>
       >>
-      <button onclick="location.href ='projectDetails.php';" class="button button2">Project Details</button>
+      <button onclick="location.href ='projectDetails.php';" class="button button2">Project <?php echo $projectID ?> Details</button>
       >>
-      <button onclick='window.location.reload(true);' class="button button2">Modify Phase</button> 
+      <button onclick='window.location.reload(true);' class="button button2">Modify Phase <?php echo $phaseID ?></button> 
     </li>
   </ul>
     <h3>Modify Project <?php echo $projectID.' Phase '.$phaseID ?></h3>

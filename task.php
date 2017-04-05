@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <link href="css/style.css" rel="stylesheet" type="text/css">
 	<title>Tasks</title>
 </head>
 <body>
-<table>
-	<tr><th>TASKS</th></tr>
-	<tr>
-			<td>
-				<form action="addTask.html" method="POST">
-					<button type="submit">Add A Task</button>
-				</form>
-			</td>
-		</tr>
+
 <?php 
 require'connection.php';
 session_start();
@@ -32,7 +25,28 @@ $_SESSION['phaseID'] = $phaseID;
 $query =  'select taskID, taskName, estimatedStartDate, actualStartDate, estimatedCost, estimatedEndDate, actualEndDate, 
 			actualCost, status from task where projectID ="'.$projectID.'" AND phaseID = "'.$phaseID.'" ORDER BY status';
 $results = mysqli_query($connection, $query);
+?>
+<h1>TASKS</h1>
+<table>
+	
+	<ul>
+		<li>
+			<button onclick="location.href ='Welcome.php';" class="button button2">Home</button>
+			>>
+			<button onclick="location.href ='projectDetails.php';" class="button button2">Project <?php echo $projectID; ?> Details</button>
+			>>
+			<button onclick='window.location.reload(true);' class="button button2">Phase  <?php echo $phaseID; ?> Tasks</button>
+		</li>
+	</ul>
 
+	<tr>
+			<td>
+				<form action="addTask.html" method="POST">
+					<button type="submit">Add A Task</button>
+				</form>
+			</td>
+		</tr>
+<?php
 while ($row = mysqli_fetch_assoc($results))
 {
 

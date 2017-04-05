@@ -78,7 +78,7 @@
             </li>
         </ul>";
     }else if($type=='Task'){
-       echo "task Type";
+       echo "ModifyTask";
     }
 
 

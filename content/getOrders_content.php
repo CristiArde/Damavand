@@ -1,8 +1,7 @@
 <?php
-session_start();
+
 $id = $_GET['id'];
 $type = $_GET['type'];	//get Orders based on Projects OR Phases. Type = Project or Type = Phase
-
 echo "<ul>
 		<li>
 			<button  onclick=\"location.href ='Welcome.php';\" class=\"button button2\">Home</button>
@@ -46,7 +45,8 @@ if($type = "Project"){
 					  <input name="type" type="hidden" value = "Order">
 					  <input name="id" type="hidden" value = '.$id.'>
 					  <input name="oid" type="hidden" value = '.$row['orderID'].'>
-					  <input type="submit" '.$enableDisable.' value="Modify Order">
+					  <input name="phaseID" type="hidden" value = '.$row['phaseID'].'>
+					  <input type="submit"  '.$enableDisable.' value="Modify Order">
 					</form>
 			</td>';
 	   $count += 1;

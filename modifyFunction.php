@@ -1,3 +1,6 @@
+<head>
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
 <div id='items-main' class='center'>
     <?php
 
@@ -8,6 +11,7 @@
     session_start();
     $id = $_POST['id'];
     $type = $_POST['type'];
+    $phaseID = $_POST['phaseID'];
 
     if($type=='Project'){
         $sql="SELECT projectID as 'Project Number', projectName as 'Project Name', projectManagerID as 'Project Manager ID', customerID as 'Customer ID', startDate as 'Start Date', endDate as 'End Date', siteAddress as 'Address', status as 'Status', estimatedCost as 'Estimated Cost', actualCost as 'Actual Cost' FROM Project WHERE projectID = '".$id."'";
@@ -51,6 +55,20 @@
     //print_r($fieldType);
     echo '<h1>Damavand Construction INC.</h1>';
     echo '<h3>Modify '.$type.'</h3>';  
+    
+    echo "<ul>
+        <li>
+            <button  onclick=\"location.href ='Welcome.php';\" class=\"button button2\">Home</button>
+            >>
+            <button onclick=\"location.href ='projectDetails.php';\" class=\"button button2\">Project " .$id. "  Details</button> 
+            >>
+            <button onclick=\"location.href ='getOrders.php?id=".$id."&type=Project';\" class=\"button button2\">Phase orders</button>
+            >>
+             <button onclick='window.location.reload(true);' class=\"button button2\">Modify Phase ".$phaseID. "Order</button>
+            >>
+        </li>
+    </ul>";
+
     echo 
     "<table id='modifyTable'>
         <tr>

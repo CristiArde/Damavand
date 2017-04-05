@@ -52,7 +52,6 @@
 					<?php
 					while ($row = mysqli_fetch_assoc($results))
 					{
-						$_SESSION['phaseID'] = $row['phaseID'];  #for modify phase page
 						$query2 = 'select SUM(estimatedCost) as "estimatedCost", SUM(actualCost) as "actualCost" from TASK t WHERE t.projectID = "'.$_SESSION['projectID'].'" AND t.phaseID = "'.$row['phaseID'].'"';
 				        $result2 = mysqli_query($connection, $query2);
 				        $costArray = mysqli_fetch_assoc($result2);
@@ -236,7 +235,7 @@
 							<form action="getOrders.php" method="GET">
 								<input name="id" id="id" type="hidden" value=<?php echo $projectID; ?>>
 								<input name="type" id="type" type="hidden" value = "Project">
-								<button type="submit">Order</button>
+								<button type="submit" name="phaseID" value=<?php echo $row['phaseID'] ?>>Order</button>
 							</form> 
 							<form action="/Damavand/task.php" method="POST">
 								<button type="submit" name="submitPID" value=<?php echo $row['phaseID'] ?>>Tasks</button>

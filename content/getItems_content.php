@@ -11,10 +11,22 @@
     echo '<h1>Damavand Construction INC.</h1>';
     echo '<h3>Items Ordered for Project '.$id.'</h3>';  
 
+    echo "<ul>
+            <li>
+                <button  onclick=\"location.href ='Welcome.php';\" class=\"button button2\">Home</button>
+                >>
+                <button onclick=\"location.href ='projectDetails.php';\" class=\"button button2\">Project " .$id. "  Details</button> 
+                >>
+                <button onclick=\"location.href ='getOrders.php?id=".$id."&type=Project';\" class=\"button button2\">Phase orders</button>
+                >>
+                 <button onclick='window.location.reload(true);' class=\"button button2\">Ordered Items</button>  
+            </li>
+        </ul>";
+
+
     echo 
     "<table id='items-table'>
         <tr>
-            <th>Project Number</th>
             <th>Phase Number</th>
             <th>Order Number</th>
             <th>Supplier</th>
@@ -26,7 +38,6 @@
     $supplierName = "";
     while($row = mysqli_fetch_array($result)) {
         echo "<tr>";
-        echo "<td>" . $row['projectID'] . "</td>";
         echo "<td>" . $row['phaseID'] . "</td>";
         echo "<td>" . $row['orderID'] . "</td>";
         echo "<td>" . $row['supplierName'] . "</td>";

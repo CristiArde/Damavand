@@ -200,10 +200,8 @@ else
 		} #if condition brace
 		?>
 		<form action="getOrders.php" method="GET">
-			<input name="id" id="id" type="hidden" value=<?php echo $projectID; ?>>
-			<input name="id" id="id" type="hidden" value=<?php echo $phaseID; ?>>
 			<input name="type" id="type" type="hidden" value = "Task">
-			<button type="submit" name="taskID" value=<?php echo $row['taskID'] ?>>Order</button>
+			<button type="submit" name="id" value=<?php echo $row['taskID'].$phaseID.$projectID; ?>>Task Orders</button>
 		</form> 
 		<button type="submit">Payments</button>
 	</td>

@@ -4,11 +4,14 @@ $id = $_GET['id'];
 $type = $_GET['type'];	//get Orders based on Projects OR Phases. Type = Project or Type = Phase
 
 require 'connection.php';
+//print_r($id);
+//print_r($type);
 if($type == "Project"){
 	$sql="SELECT supplierName, status , orderID, phaseID,totalCost, orderDate, estimatedDeliveryDate FROM Orders o  INNER JOIN supplier s ON s.supplierID = o.supplierID INNER JOIN project p ON p.projectID = '".$id."'WHERE o.projectID = '".$id."'";
 }
 else if($type == "Phase"){
 	$phaseID = $_GET['phaseID'];
+
 echo "<ul>
             <li>
                 <button  onclick=\"location.href ='Welcome.php';\" class=\"button button2\">Home</button>
@@ -18,7 +21,14 @@ echo "<ul>
                 <button onclick=\"location.href ='getOrders.php?id=".$id."&type=Phase&phaseID=".$phaseID."';\" class=\"button button2\">Phase ".$phaseID." orders</button> 
             </li>
         </ul>";
-	$sql="SELECT supplierName, status , orderID, phaseID,totalCost, orderDate, estimatedDeliveryDate FROM Orders o  INNER JOIN supplier s ON s.supplierID = o.supplierID INNER JOIN project p ON p.projectID = '".$id."'WHERE o.projectID = '".$id."' AND o.phaseID = '".$phaseID."'";
+
+
+	$sql="SELECT supplierName, status , orderID, phaseID,totalCost, orderDate, estimatedDeliveryDate FROM Orders o  INNER JOIN supplier s ON s.supplierID = o.supplierID INNER JOIN project p ON p.projectID = '".$id."'WHERE o.projectID = ".$id." AND o.phaseID = ".$phaseID;
+}
+else if($type =='Task'){
+	//$task = $_GET['taskID'];
+	///echo $task;
+	$sql="SELECT supplierName, status , orderID, o.phaseID,totalCost, orderDate, estimatedDeliveryDate FROM Orders o  INNER JOIN supplier s ON s.supplierID = o.supplierID INNER JOIN task t on CONCAT(t.taskID,t.phaseID,t.projectID) = ".$id."  where CONCAT(o.taskID,o.phaseID,o.projectID) = ".$id;
 }	
 	$result = mysqli_query($connection,$sql);		
 	echo 

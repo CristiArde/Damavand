@@ -20,7 +20,7 @@ $newtaskID =  'SELECT MAX(taskID) as newTaskID from task where projectID ="'.$pr
 
 $newID = $newIDResult['newTaskID'] + 1;
 
-$query =  "INSERT INTO task (taskID, phaseID, projectID, taskName, estimatedStartDate, actualStartDate, estimatedCost, estimatedEndDate, actualEndDate, actualCost, status) VALUES ('".$newID."','".$phaseID."','".$projectID."','".$phaseName."','".$estimatedCost."','".$actualCost."','".$estStartDate."','".$estEndDate."','".$actualStartDate."','".$actualEndDate."','".$status."')";
+$query =  "INSERT INTO task (taskID, phaseID, projectID, taskName, estimatedStartDate, actualStartDate, estimatedCost, estimatedEndDate, actualEndDate, actualCost, status) VALUES ('".$newID."','".$phaseID."','".$projectID."','".$taskName."','".$estStartDate."','".$actualStartDate."','".$estimatedCost."','".$estEndDate."','".$actualEndDate."','".$actualCost."','".$status."')";
 $connection->query($query);
 
 $_SESSION['projectID'] = $projectID;

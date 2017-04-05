@@ -6,7 +6,7 @@
 	<?php
 	session_start();
 	
-	//echo  $_POST['phaseID'];
+	//echo  $_GET['type'];
 	
 	$page_content = 'content/getOrders_content.php';
 	include('master.php');

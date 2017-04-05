@@ -2,19 +2,24 @@
 
 $id = $_GET['id'];
 $type = $_GET['type'];	//get Orders based on Projects OR Phases. Type = Project or Type = Phase
-echo "<ul>
-		<li>
-			<button  onclick=\"location.href ='Welcome.php';\" class=\"button button2\">Home</button>
-			>>
-			<button onclick=\"location.href ='projectDetails.php';\" class=\"button button2\">Project " .$id. "  Details</button> 
-			>>
-			<button onclick='window.location.reload(true);' class=\"button button2\">Phase orders</button> 
-		</li>
-	</ul>";
 
 require 'connection.php';
-if($type = "Project"){
+if($type == "Project"){
 	$sql="SELECT supplierName, status , orderID, phaseID,totalCost, orderDate, estimatedDeliveryDate FROM Orders o  INNER JOIN supplier s ON s.supplierID = o.supplierID INNER JOIN project p ON p.projectID = '".$id."'WHERE o.projectID = '".$id."'";
+}
+else if($type == "Phase"){
+	$phaseID = $_GET['phaseID'];
+echo "<ul>
+            <li>
+                <button  onclick=\"location.href ='Welcome.php';\" class=\"button button2\">Home</button>
+                >>
+                <button onclick=\"location.href ='projectDetails.php';\" class=\"button button2\">Project " .$id. "  Details</button> 
+                >>
+                <button onclick=\"location.href ='getOrders.php?id=".$id."&type=Phase&phaseID=".$phaseID."';\" class=\"button button2\">Phase ".$phaseID." orders</button> 
+            </li>
+        </ul>";
+	$sql="SELECT supplierName, status , orderID, phaseID,totalCost, orderDate, estimatedDeliveryDate FROM Orders o  INNER JOIN supplier s ON s.supplierID = o.supplierID INNER JOIN project p ON p.projectID = '".$id."'WHERE o.projectID = '".$id."' AND o.phaseID = '".$phaseID."'";
+}	
 	$result = mysqli_query($connection,$sql);		
 	echo 
 	"<table id='order-table'>
@@ -64,6 +69,5 @@ if($type = "Project"){
 		</form> 
 		</td>';
 	echo "</table>";
-}
 mysqli_close($connection);
 ?>

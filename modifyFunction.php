@@ -11,7 +11,7 @@
     session_start();
     $id = $_POST['id'];
     $type = $_POST['type'];
-    $phaseID = $_POST['phaseID'];
+    //$phaseID = $_POST['phaseID'];
 
     if($type=='Project'){
         $sql="SELECT projectID as 'Project Number', projectName as 'Project Name', projectManagerID as 'Project Manager ID', customerID as 'Customer ID', startDate as 'Start Date', endDate as 'End Date', siteAddress as 'Address', status as 'Status', estimatedCost as 'Estimated Cost', actualCost as 'Actual Cost' FROM Project WHERE projectID = '".$id."'";
@@ -56,24 +56,39 @@
     echo '<h1>Damavand Construction INC.</h1>';
     echo '<h3>Modify '.$type.'</h3>';  
     
-    echo "<ul>
+    if($type=='Project'){
+       echo "<ul>
         <li>
             <button  onclick=\"location.href ='Welcome.php';\" class=\"button button2\">Home</button>
             >>
-            <button onclick=\"location.href ='projectDetails.php';\" class=\"button button2\">Project " .$id. "  Details</button> 
-            >>
-            <button onclick=\"location.href ='getOrders.php?id=".$id."&type=Project';\" class=\"button button2\">Phase orders</button>
-            >>
-             <button onclick='window.location.reload(true);' class=\"button button2\">Modify Phase ".$phaseID. "Order</button>
-            >>
+            <button onclick=\"location.href ='projectDetails.php';\" class=\"button button2\">Modify Project " .$id. " </button> 
         </li>
     </ul>";
+    }else if($type=='Order'){
+       echo "<ul>
+            <li>
+                <button  onclick=\"location.href ='Welcome.php';\" class=\"button button2\">Home</button>
+                >>
+                <button onclick=\"location.href ='projectDetails.php';\" class=\"button button2\">Project " .$id. "  Details</button> 
+                >>
+                <button onclick=\"location.href ='getOrders.php?id=".$id."&type=Phase&phaseID=".$valueArray[2]."';\" class=\"button button2\">Phase ".$valueArray[2]." orders</button>
+                >>
+                <button onclick='window.location.reload(true);' class=\"button button2\">Modify Order ".$oid."</button>
 
+            </li>
+        </ul>";
+    }else if($type=='Task'){
+       echo "task Type";
+    }
+
+
+    echo '<form action="updateFunction.php" method="POST">';
     echo 
     "<table id='modifyTable'>
         <tr>
             <th>Attribute Names</th>
             <th>Values</th>
+            <th></th>
         </tr>";
     for($x = 0; $x < $fieldCount; $x++){
         echo "<tr>";
@@ -92,7 +107,9 @@
         echo "<td>".$inputType."value=".$valueArray[$x]." id=".$fieldOrig[$x]." name=".$fieldOrig[$x].">"."</td>";
         echo "</tr>";
     }
+    echo '<tr> <td><input id="submit" type="submit" value="Submit"><input id="submit" type="submit" value="Cancel"></td>';
     echo "</table>";
+    echo '</form>';
     mysqli_close($connection);
     ?>
 </div>

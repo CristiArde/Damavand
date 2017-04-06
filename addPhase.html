@@ -3,6 +3,27 @@
 <head>
 <head>
   <link href="css/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+    <script type="text/javascript">
+       function validateForm()
+       {
+       	var phaseName= document.forms["myForm"]["phaseName"].value;
+       	var status= document.forms["myForm"]["status"].value;
+       //	var cost= document.forms["myForm"]["fname"].value;
+       if (phaseName == "")
+       {
+       		alert("Phase Name must be filled")
+       		return false;
+       }
+       else if (status ="" || status != "Complete"|| status != "In Progress"|| status != "Not Started")
+       {
+       	  alert("Current Status is not filled properly");
+       	  return false;
+       }
+
+       }
+    </script>
+
 <title>Add Phase</title>
 </head>
 <body>
@@ -19,7 +40,7 @@
 			<button onclick='window.location.reload(true);' class="button button2">Add Project Phase</button> 
 		</li>
 	</ul>
-  <form action="/Damavand/addThePhase.php" method="POST">
+  <form name="myForm" action="/Damavand/addThePhase.php" onsubmit="return validateForm()" method="POST">
   Phase Name: <input type="text" name="phaseName"><br><br>
   Estimated Start date: <input type="date" name="estStartDate"><br><br>
   Estimated End date: <input type="date" name="estEndDate"><br><br>

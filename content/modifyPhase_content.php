@@ -23,7 +23,7 @@
 
   $nameEr = $statusEr = $estStartDateEr = $actualStartDateEr = "";
   
-
+/*
   if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (is_numeric($_POST['phaseName'])) {
       $nameEr = "Invalid entry";
@@ -37,7 +37,7 @@
       $estStartDateEr = "It works";
     }
   } 
-
+*/
 
   ?>
     <h1>Damavand Construction INC.</h1>

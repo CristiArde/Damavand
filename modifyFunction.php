@@ -78,7 +78,18 @@
             </li>
         </ul>";
     }else if($type=='Task'){
-       echo "ModifyTask";
+       echo "<ul>
+        <li>
+            <button onclick=\"location.href ='Welcome.php';\" class=\"button button2\">Home</button>
+            >>
+            <button onclick=\"location.href ='projectDetails.php';\" class=\"button button2\">Project " .$valueArray[2]. "  Details</button>
+            >>
+            <button onclick=\"location.href ='task.php';\" class=\"button button2\">Phase " .$valueArray[1]." Tasks</button>
+            >>
+            <button onclick='window.location.reload(true);' class=\"button button2\">Modify Task ".$valueArray[0]."</button>
+
+        </li>
+    </ul>";
     }
 
 

@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-<head>
   <link href="css/style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
     <script type="text/javascript">
        function validateForm()
        {
-       	var phaseName= document.forms["myForm"]["phaseName"].value;
-       	var status= document.forms["myForm"]["status"].value;
-       //	var cost= document.forms["myForm"]["fname"].value;
-       if (phaseName == "")
-       {
-       		alert("Phase Name must be filled")
-       		return false;
-       }
-       else if (status ="" || status != "Complete"|| status != "In Progress"|| status != "Not Started")
-       {
-       	  alert("Current Status is not filled properly");
-       	  return false;
-       }
+         	var phaseName= document.forms["myForm"]["phaseName"].value;
+         	var status= document.forms["myForm"]["status"].value;
+          var estStartDate = document.forms["myForm"]["estStartDate"].value;
+          var actualStartDate = document.forms["myForm"]["actualStartDate"].value;
+         //	var cost= document.forms["myForm"]["fname"].value;
+         if (phaseName == "")
+         {
+         		alert("Phase Name must be filled")
+            alert(Date.parse(estStartDate)-Date.parse(new Date()));
+         		return false;
+         }
+         else if ((status =="") || !(status == "Complete" || status == "In Progress" || status == "Not Started"))
+         {
+           alert("Current Status is not filled properly");
+          return false;
+         }
+         else if(Date.parse(estStartDate)-Date.parse(new Date())<0)
+         {
+
+          alert("Invalid date");
+          return false;
+         }
+         
+        
 
        }
     </script>

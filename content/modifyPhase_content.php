@@ -10,11 +10,35 @@
   $_SESSION['phaseID'] = $phaseID;
   $_SESSION['pID'] = $projectID; #not needed if the hidden PID works
 
-    $query =  'select phaseName, estimatedStartDate, estimatedEndDate, actualStartDate,
-    actualEndDate, status from Phase where projectID ="'.$projectID.'" AND phaseID = "'.$phaseID.'"';
-    $results = mysqli_query($connection, $query);
-    $row = mysqli_fetch_assoc($results);
-    
+  $query =  'select phaseName, estimatedStartDate, estimatedEndDate, actualStartDate,
+  actualEndDate, status from Phase where projectID ="'.$projectID.'" AND phaseID = "'.$phaseID.'"';
+  $results = mysqli_query($connection, $query);
+  $row = mysqli_fetch_assoc($results);
+  
+  $dateQuery = 'select startDate from project where projectID = "'.$projectID.'"';
+  $dateResult = mysqli_query($connection, $dateQuery);
+  $dateRow = mysqli_fetch_assoc($dateResult);
+  
+
+
+  $nameEr = $statusEr = $estStartDateEr = $actualStartDateEr = "";
+  
+
+  if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    if (is_numeric($_POST['phaseName'])) {
+      $nameEr = "Invalid entry";
+    }
+    if (empty($_POST['status']) || $_POST['status'] != "In Progress" ||  $_POST['status'] != "Complete" || $_POST['status'] != "Not Started")
+    {
+      $statusEr = "Invalid entry";
+    }
+    if($_POST['estStartDate'] > $dateRow['startDate'])
+    {
+      $estStartDateEr = "It works";
+    }
+  } 
+
+
   ?>
     <h1>Damavand Construction INC.</h1>
     
@@ -28,16 +52,18 @@
     </li>
   </ul>
     <h3>Modify Project <?php echo $projectID.' Phase '.$phaseID ?></h3>
-    <form action="modifiedPhase.php" method="POST">
+    <form action="modifiedPhase.php" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
       <input type="hidden" name="PID" id="PID" value=<?php echo $projectID ?>/> <!--  THIS DOESNT WORK   -->
       <table id='modify-phase-table' class='center'>
         <tr>
           <td>Phase Name: </td>
-          <td><input type="text" name="phaseName" value=<?php echo $row['phaseName']?>></td>
+          <td><input type="text" name="phaseName" id="phaseName" value=<?php echo $row['phaseName']?>></td>
+          <span class="error">* <?php echo $nameEr;?></span>
         </tr>
         <tr>
           <td>Estimated Start Date: </td>
           <td><input type="date" name="estStartDate" value="<?php echo date('Y-m-d',strtotime($row['estimatedStartDate'])) ?>"></td>
+          <span class="error">* <?php echo $estStartDateEr;?></span>
         </tr>
         <tr>
           <td>Estimated End Date: </td>
@@ -54,6 +80,7 @@
         <tr>
           <td>Current Status (Complete, In Progress, Not Started): </td>
           <td><input type="text" name="status" value="<?php echo $row['status']?>"/></td>
+          <span class="error">* <?php echo $statusEr;?></span>
         </tr>
         <tr>
           <td colspan="2"><input type="submit" value="Submit"></td>

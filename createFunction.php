@@ -15,7 +15,7 @@ if($type=='Project'){
         $estimatedCost = $_POST['estimatedCost'];;
         $actualCost = $_POST['actualCost'];;
 
-        $sql = "INSERT INTO project VALUES ('".$projectName."',".$projectManagerID.",".$customerID.",".$startDate."',".$endDate.",'".$siteAddress."','".$status."',".$estimatedCost.",".$actualCost.")";
+        $sql = "INSERT INTO project (projectName, projectManagerID, customerID, startDate, endDate, siteAddress, status, estimatedCost, actualCost) VALUES ('".$projectName."',".$projectManagerID.",".$customerID.",'".$startDate."','".$endDate."','".$siteAddress."','".$status."',".$estimatedCost.",".$actualCost.")";
     }else if($type=='Order'){
       
         $projectID = $_POST['projectID'];
@@ -26,7 +26,7 @@ if($type=='Project'){
         $orderDate = $_POST['orderDate'];
         $estimatedDeliveryDate = $_POST['estimatedDeliveryDate'];
 
-        $sql = "INSERT INTO  orders VALUES (".$projectID.",".$phaseID.",".$taskID.",".$supplierID.",".$totalCost.",".$orderDate.",".$estimatedDeliveryDate.")";
+        $sql = "INSERT INTO  orders (projectID, phaseID, taskID, supplierID, totalCost, orderDate, estimatedDeliveryDate) VALUES (".$projectID.",".$phaseID.",".$taskID.",".$supplierID.",".$totalCost.",'".$orderDate."','".$estimatedDeliveryDate."')";
 
 
     }else if($type=='Item'){
@@ -41,5 +41,12 @@ if($type=='Project'){
 mysqli_query($connection,$sql);
 //$stmt ->execute();
 mysqli_close($connection);
-header('Location: /Damavand/getItems.php?id='.$_SESSION['projectID'].'&type=Project.php');
+if($type=='Item')
+	header('Location: /Damavand/getItems.php?id='.$_SESSION['projectID'].'&type=Project');
+else if($type=='Order'){
+	header('Location: /Damavand/getOrders.php?id='.$_SESSION['projectID'].'&type=Project');
+}
+else if($type=='Project'){
+	header('Location: /Damavand/Welcome.php');
+}
 ?>

@@ -72,12 +72,6 @@ else if($type =='Task'){
 				  <input name="type" id="type" type="hidden" value = "Order">
 				  <input type="submit" '.$enableDisable.' value="Create Order">
 			</form>
-		 	<form action="placeOrder.php">
-				  <input name="id" type="hidden" value = "'.$id.'">
-				  <input name="type" type="hidden" value = "Project">
-				  <input type="submit" '.$enableDisable.' value="Place Order">
-
-			</form>
 			<form action="getItems.php">
 				  <input name="id" type="hidden" value = "'.$id.'">
 				  <input name="type" type="hidden" value = "Project">

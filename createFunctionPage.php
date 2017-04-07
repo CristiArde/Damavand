@@ -4,7 +4,7 @@
 <script>
 $(document).ready(function(){
     $(document.getElementById("itemButton")).click(function(){
-        $(document.getElementById("form1")).clone().appendTo("body");
+        $(document.getElementById("form2")).clone().appendTo("body");
     });
 });
 </script>
@@ -25,10 +25,10 @@ $(document).ready(function(){
         $sql="SELECT projectID as 'Project Number', projectName as 'Project Name', projectManagerID as 'Project Manager ID', customerID as 'Customer ID', startDate as 'Start Date', endDate as 'End Date', siteAddress as 'Address', status as 'Status', estimatedCost as 'Estimated Cost', actualCost as 'Actual Cost' FROM Project ORDER BY projectID ASC LIMIT 1";
     }else if($type=='Order'){
         $sql="SELECT orderID as 'Order Number', projectID as 'Project Number', phaseID as 'Phase Number', taskID as 'Task Number', supplierID as 'Supplier ID', totalCost as 'Total Cost', orderDate as 'Order Date', estimatedDeliveryDate as 'Estimated Delivery Date' FROM Orders ORDER BY orderID ASC LIMIT 1";
-        $sql2="SELECT itemID as 'Item ID',  itemName as 'Item Name', unitCost as 'Unit Cost', quantity as 'Quantity', orderID as 'Order Number', supplierID as 'Supplier ID' FROM Items ORDER BY itemID ASC LIMIT 1";
+       // $sql2="SELECT itemID as 'Item ID',  itemName as 'Item Name', unitCost as 'Unit Cost', quantity as 'Quantity', orderID as 'Order Number', supplierID as 'Supplier ID' FROM Items ORDER BY itemID ASC LIMIT 1";
 
 
-    $result2 = mysqli_query($connection,$sql);
+    /*$result2 = mysqli_query($connection,$sql);
     $fieldCount2 = mysqli_num_fields($result2);
     $fields2 = mysqli_fetch_fields($result2);
     $fieldArray2 = array();
@@ -41,7 +41,7 @@ $(document).ready(function(){
         $fieldType2[$count] = $fields->type;
         $count ++;
     }
-
+*/
     }else if($type=='Item'){
     	$sql2="SELECT  orderID as 'Order Number' FROM Orders ORDER BY orderID ASC";
     	$sql="SELECT itemID as 'Item ID',  itemName as 'Item Name', unitCost as 'Unit Cost', quantity as 'Quantity', orderID as 'Order Number', supplierID as 'Supplier ID' FROM Items ORDER BY itemID ASC LIMIT 1";
@@ -121,38 +121,6 @@ $(document).ready(function(){
         echo "</tr>";
     }
     echo '<tr> <td><input id="submit" type="submit" value="Submit"><input id="submit" type="submit" value="Cancel"></td>';
-    echo "</table>";
-    echo '</form>';
-    if($type=='Order'){
-        echo '<h3>Create Item</h3>'; 
-        echo '<form id="form2" name="form2" action="createFunction.php" method="POST">';
-        echo 
-        "<table id='modifyTable'>
-            <tr>
-                <th>Attribute Names</th>
-                <th>Values</th>
-                <th></th>
-            </tr>";
-        for($x = 0; $x < $fieldCount2; $x++){
-            echo "<tr>";
-            //Decide Input type
-            $inputType ="";
-            switch ($fieldType2[$x]) {
-                case "3":                                       //Integer
-                case "253":                                     //VarChar
-                case "246":                                     //Decimal
-                    $inputType = '<input type="text" ';
-                    break;
-                case "10":                                      //Date
-                    $inputType = '<input type="Date" ';      
-            }
-            echo "<td>".$fieldArray2[$x]."</td>";
-            echo "<td>".$inputType." id=".$fieldOrig2[$x]." name=".$fieldOrig2[$x].">"."</td>";
-            echo "</tr>";
-        }   
-    }
-
-    echo '<tr><td><button id="itemButton" name="itemButton">Add Another Item</td></tr>';
     echo "</table>";
     echo '</form>';
     mysqli_close($connection);

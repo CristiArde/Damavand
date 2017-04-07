@@ -26,7 +26,10 @@
 				</select>
 			</td>
 			<td>
-				<form action='createProject.php'><input type='submit' value='Create Project'></form>
+				<form action='createFunctionPage.php' method='POST'>
+				<input type="hidden" id="type" name="type" value="Project">
+				<input type='submit' value='Create Project'>
+				</form>
 			</td>
 			</tr>
 	</table>

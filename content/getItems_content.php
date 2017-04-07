@@ -59,7 +59,6 @@
         SHOW ADD ORDERS BUTTON IF PROJECT/PHASE/TASK NOT COMPLETED*/
         echo " No Items ";
     }
-<<<<<<< HEAD
     ?>
 
 
@@ -69,8 +68,6 @@
     </form>
 
     <?php
-=======
->>>>>>> origin/master
     mysqli_close($connection);
     ?>
 </div>

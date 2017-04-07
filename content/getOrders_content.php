@@ -26,8 +26,6 @@ echo "<ul>
 	$sql="SELECT supplierName, status , orderID, phaseID,totalCost, orderDate, estimatedDeliveryDate FROM Orders o  INNER JOIN supplier s ON s.supplierID = o.supplierID INNER JOIN project p ON p.projectID = '".$id."'WHERE o.projectID = ".$id." AND o.phaseID = ".$phaseID;
 }
 else if($type =='Task'){
-	//$task = $_GET['taskID'];
-	///echo $task;
 	$sql="SELECT supplierName, status , orderID, o.phaseID,totalCost, orderDate, estimatedDeliveryDate FROM Orders o  INNER JOIN supplier s ON s.supplierID = o.supplierID INNER JOIN task t on CONCAT(t.taskID,t.phaseID,t.projectID) = ".$id."  where CONCAT(o.taskID,o.phaseID,o.projectID) = ".$id;
 }	
 	$result = mysqli_query($connection,$sql);

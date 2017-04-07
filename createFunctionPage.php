@@ -1,5 +1,13 @@
 <head>
   <link href="css/style.css" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $(document.getElementById("itemButton")).click(function(){
+        $(document.getElementById("form1")).clone().appendTo("body");
+    });
+});
+</script>
 </head>
 <div id='items-main' class='center'>
     <?php
@@ -28,9 +36,9 @@
     $fieldType2 = array();
 
     while($fields=mysqli_fetch_field($result2)) {
-        $fieldArray[$count] = $fields->name;
-        $fieldOrig[$count] = $fields->orgname;      //name within tables
-        $fieldType[$count] = $fields->type;
+        $fieldArray2[$count] = $fields->name;
+        $fieldOrig2[$count] = $fields->orgname;      //name within tables
+        $fieldType2[$count] = $fields->type;
         $count ++;
     }
 
@@ -112,7 +120,9 @@
         echo "<td>".$inputType." id=".$fieldOrig[$x]." name=".$fieldOrig[$x].">"."</td>";
         echo "</tr>";
     }
-
+    echo '<tr> <td><input id="submit" type="submit" value="Submit"><input id="submit" type="submit" value="Cancel"></td>';
+    echo "</table>";
+    echo '</form>';
     if($type=='Order'){
         echo '<h3>Create Item</h3>'; 
         echo '<form id="form2" name="form2" action="createFunction.php" method="POST">';
@@ -139,10 +149,10 @@
             echo "<td>".$fieldArray2[$x]."</td>";
             echo "<td>".$inputType." id=".$fieldOrig2[$x]." name=".$fieldOrig2[$x].">"."</td>";
             echo "</tr>";
-    }   
+        }   
     }
 
-    echo '<tr> <td><input id="submit" type="submit" value="Submit"><input id="submit" type="submit" value="Cancel"></td>';
+    echo '<tr><td><button id="itemButton" name="itemButton">Add Another Item</td></tr>';
     echo "</table>";
     echo '</form>';
     mysqli_close($connection);

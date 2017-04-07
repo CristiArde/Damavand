@@ -10,11 +10,12 @@
          	var status= document.forms["myForm"]["status"].value;
           var estStartDate = document.forms["myForm"]["estStartDate"].value;
           var actualStartDate = document.forms["myForm"]["actualStartDate"].value;
+          var estEndDate = document.forms["myForm"]["estEndDate"].value;
+          var actualEndDate = document.forms["myForm"]["actualEndDate"].value;
          //	var cost= document.forms["myForm"]["fname"].value;
          if (phaseName == "")
          {
          		alert("Phase Name must be filled")
-            alert(Date.parse(estStartDate)-Date.parse(new Date()));
          		return false;
          }
          else if ((status =="") || !(status == "Complete" || status == "In Progress" || status == "Not Started"))
@@ -22,10 +23,28 @@
            alert("Current Status is not filled properly");
           return false;
          }
-         else if(Date.parse(estStartDate)-Date.parse(new Date())<0)
+         else if((Date.parse(estStartDate)-Date.parse(new Date()))<0 || estStartDate == "")
          {
 
-          alert("Invalid date");
+          alert("Invalid Estimated Start date");
+          return false;
+         }
+         else if((Date.parse(actualStartDate)-Date.parse(new Date()))<0 || actualStartDate == "")
+         {
+
+          alert("Invalid Actual Start date");
+          return false;
+         }
+         else if((Date.parse(estEndDate)-Date.parse(new Date()))<0 || estEndDate =="")
+         {
+
+          alert("Invalid Estimate End date");
+          return false;
+         }
+         else if((Date.parse(actualEndDate)-Date.parse(new Date()))<0 || actualEndDate =="")
+         {
+
+          alert("Invalid Actual End date");
           return false;
          }
          

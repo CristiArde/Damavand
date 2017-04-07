@@ -1,5 +1,3 @@
-<div id='modify-phase-main' class='center'>
-  
   <?php
   require'connection.php';
   session_start();
@@ -19,27 +17,65 @@
   $dateResult = mysqli_query($connection, $dateQuery);
   $dateRow = mysqli_fetch_assoc($dateResult);
   
-
-
-  $nameEr = $statusEr = $estStartDateEr = $actualStartDateEr = "";
-  
-/*
-  if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    if (is_numeric($_POST['phaseName'])) {
-      $nameEr = "Invalid entry";
-    }
-    if (empty($_POST['status']) || $_POST['status'] != "In Progress" ||  $_POST['status'] != "Complete" || $_POST['status'] != "Not Started")
-    {
-      $statusEr = "Invalid entry";
-    }
-    if($_POST['estStartDate'] > $dateRow['startDate'])
-    {
-      $estStartDateEr = "It works";
-    }
-  } 
-*/
-
   ?>
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+  <script type="text/javascript">
+   
+  function validateForm()
+  {
+          var phaseName= document.forms["myForm"]["phaseName"].value;
+          var status= document.forms["myForm"]["status"].value;
+          var estStartDate = document.forms["myForm"]["estStartDate"].value;
+          var estEndDate = document.forms["myForm"]["estEndDate"].value;
+          var actualStartDate = document.forms["myForm"]["actualStartDate"].value;
+          var actualEndDate = document.forms["myForm"]["actualEndDate"].value;
+          var projectDate = "<?php echo $dateRow['startDate']; ?>";
+         // alert(projectDate);
+          //return false;
+      
+         if (phaseName == "")
+         {
+            alert("Phase Name must be filled")
+            return false;
+         }
+         else if ((status =="") || !(status == "Complete" || status == "In Progress" || status == "Not Started"))
+         {
+           alert("Current Status is not filled properly");
+          return false;
+         }
+         else if((Date.parse(estStartDate)-Date.parse(projectDate))<0 || estStartDate == "")
+         {
+          alert("Invalid Estimated Start date");
+          return false;
+         }
+         else if((Date.parse(actualStartDate)-Date.parse(projectDate))<0 || actualStartDate == "")
+         {
+
+          alert("Invalid Actual Start date");
+          return false;
+         }
+         else if(((Date.parse(estEndDate)-Date.parse(projectDate))<0 || (Date.parse(estEndDate)-Date.parse(estStartDate))<0) || estEndDate =="")
+         {
+
+          alert("Invalid Estimate End date");
+          return false;
+         } 
+         else if(((Date.parse(actualEndDate)-Date.parse(projectDate))<0 || (Date.parse(actualEndDate)-Date.parse(actualStartDate))<0)|| actualEndDate =="")
+         {
+
+          alert("Invalid Actual End date");
+          return false;
+         }
+    }
+  </script>
+</head>
+
+
+<div id='modify-phase-main' class='center'>
+  
     <h1>Damavand Construction INC.</h1>
     
 <ul>
@@ -52,18 +88,16 @@
     </li>
   </ul>
     <h3>Modify Project <?php echo $projectID.' Phase '.$phaseID ?></h3>
-    <form action="modifiedPhase.php" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    <form name="myForm" action="modifiedPhase.php" onsubmit="return validateForm()" method="POST">
       <input type="hidden" name="PID" id="PID" value=<?php echo $projectID ?>/> <!--  THIS DOESNT WORK   -->
       <table id='modify-phase-table' class='center'>
         <tr>
           <td>Phase Name: </td>
           <td><input type="text" name="phaseName" id="phaseName" value=<?php echo $row['phaseName']?>></td>
-          <span class="error">* <?php echo $nameEr;?></span>
         </tr>
         <tr>
           <td>Estimated Start Date: </td>
           <td><input type="date" name="estStartDate" value="<?php echo date('Y-m-d',strtotime($row['estimatedStartDate'])) ?>"></td>
-          <span class="error">* <?php echo $estStartDateEr;?></span>
         </tr>
         <tr>
           <td>Estimated End Date: </td>
@@ -80,7 +114,6 @@
         <tr>
           <td>Current Status (Complete, In Progress, Not Started): </td>
           <td><input type="text" name="status" value="<?php echo $row['status']?>"/></td>
-          <span class="error">* <?php echo $statusEr;?></span>
         </tr>
         <tr>
           <td colspan="2"><input type="submit" value="Submit"></td>
@@ -88,3 +121,4 @@
       </table>
   </form>
 </div>
+</html>

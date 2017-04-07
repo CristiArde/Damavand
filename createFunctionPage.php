@@ -19,12 +19,13 @@ $(document).ready(function(){
     session_start();
     $count = 0;
     $type = $_POST['type'];
+    $_SESSION['type'] = $type;
     //$phaseID = $_POST['phaseID'];
 
     if($type=='Project'){
-        $sql="SELECT projectID as 'Project Number', projectName as 'Project Name', projectManagerID as 'Project Manager ID', customerID as 'Customer ID', startDate as 'Start Date', endDate as 'End Date', siteAddress as 'Address', status as 'Status', estimatedCost as 'Estimated Cost', actualCost as 'Actual Cost' FROM Project ORDER BY projectID ASC LIMIT 1";
+        $sql="SELECT projectName as 'Project Name', projectManagerID as 'Project Manager ID', customerID as 'Customer ID', startDate as 'Start Date', endDate as 'End Date', siteAddress as 'Address', status as 'Status', estimatedCost as 'Estimated Cost', actualCost as 'Actual Cost' FROM Project ORDER BY projectID ASC LIMIT 1";
     }else if($type=='Order'){
-        $sql="SELECT orderID as 'Order Number', projectID as 'Project Number', phaseID as 'Phase Number', taskID as 'Task Number', supplierID as 'Supplier ID', totalCost as 'Total Cost', orderDate as 'Order Date', estimatedDeliveryDate as 'Estimated Delivery Date' FROM Orders ORDER BY orderID ASC LIMIT 1";
+        $sql="SELECT projectID as 'Project Number', phaseID as 'Phase Number', taskID as 'Task Number', supplierID as 'Supplier ID', totalCost as 'Total Cost', orderDate as 'Order Date', estimatedDeliveryDate as 'Estimated Delivery Date' FROM Orders ORDER BY orderID ASC LIMIT 1";
        // $sql2="SELECT itemID as 'Item ID',  itemName as 'Item Name', unitCost as 'Unit Cost', quantity as 'Quantity', orderID as 'Order Number', supplierID as 'Supplier ID' FROM Items ORDER BY itemID ASC LIMIT 1";
 
 
@@ -44,7 +45,7 @@ $(document).ready(function(){
 */
     }else if($type=='Item'){
     	$sql2="SELECT  orderID as 'Order Number' FROM Orders ORDER BY orderID ASC";
-    	$sql="SELECT itemID as 'Item ID',  itemName as 'Item Name', unitCost as 'Unit Cost', quantity as 'Quantity', orderID as 'Order Number', supplierID as 'Supplier ID' FROM Items ORDER BY itemID ASC LIMIT 1";
+    	$sql="SELECT itemName as 'Item Name', unitCost as 'Unit Cost', quantity as 'Quantity', supplierID as 'Supplier ID' FROM Items ORDER BY itemID ASC LIMIT 1";
     }
     
     $result = mysqli_query($connection,$sql);
@@ -120,7 +121,16 @@ $(document).ready(function(){
         echo "<td>".$inputType." id=".$fieldOrig[$x]." name=".$fieldOrig[$x].">"."</td>";
         echo "</tr>";
     }
-    echo '<tr> <td><input id="submit" type="submit" value="Submit"><input id="submit" type="submit" value="Cancel"></td>';
+    $addOn = "";
+    if($type=='Item'){
+        $addOn ="<select id='OrderID'>";
+        $result = mysqli_query($connection,$sql2);
+        while($row = mysqli_fetch_array($result)) {
+            $addOn .= "<option id=oid name=oid value=".$row['Order Number'].">Order Number ".$row['Order Number']."</option>";
+        }
+        $addOn .= "</select>";
+    }
+    echo '<tr> <td><input id="submit" type="submit" value="Submit"><input id="submit" type="submit" value="Cancel"> Add to Order: '.$addOn.'</td>';
     echo "</table>";
     echo '</form>';
     mysqli_close($connection);

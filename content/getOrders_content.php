@@ -73,7 +73,7 @@ else if($type =='Task'){
 		 	<form action="createFunctionPage.php" method="POST">
 				  <input name="type" id="type" type="hidden" value = "Order">
 				  <input type="submit" '.$enableDisable.' value="Create Order">
-
+			</form>
 		 	<form action="placeOrder.php">
 				  <input name="id" type="hidden" value = "'.$id.'">
 				  <input name="type" type="hidden" value = "Project">

@@ -1,6 +1,4 @@
 payments page
-task to orders doesnt work anymore 
-phases to orders doesnt work anymore
 register user page
 task connection verification
 customer views/pages

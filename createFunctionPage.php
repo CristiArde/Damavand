@@ -123,7 +123,7 @@ $(document).ready(function(){
     }
     $addOn = "";
     if($type=='Item'){
-        $addOn ="<select id='OrderID'>";
+        $addOn ="<select name='OrderID' id='OrderID'>";
         $result = mysqli_query($connection,$sql2);
         while($row = mysqli_fetch_array($result)) {
             $addOn .= "<option id=oid name=oid value=".$row['Order Number'].">Order Number ".$row['Order Number']."</option>";

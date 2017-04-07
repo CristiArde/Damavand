@@ -15,7 +15,7 @@ if($type=='Project'){
         $estimatedCost = $_POST['estimatedCost'];;
         $actualCost = $_POST['actualCost'];;
 
-        $sql = "INSERT INTO project VALUES (".$projectName.",".$projectManagerID.",".$customerID.",".$startDate."',".$endDate.",".$siteAddress.",".$status.",".$estimatedCost.",".$actualCost.")";
+        $sql = "INSERT INTO project VALUES ('".$projectName."',".$projectManagerID.",".$customerID.",".$startDate."',".$endDate.",'".$siteAddress."','".$status."',".$estimatedCost.",".$actualCost.")";
     }else if($type=='Order'){
       
         $projectID = $_POST['projectID'];
@@ -30,10 +30,16 @@ if($type=='Project'){
 
 
     }else if($type=='Item'){
-    	$sql="SELECT itemID as 'Item ID',  itemName as 'Item Name', unitCost as 'Unit Cost', quantity as 'Quantity', orderID as 'Order Number', supplierID as 'Supplier ID' FROM Items ORDER BY itemID ASC LIMIT 1";
+    	$itemName = $_POST['itemName'];
+    	$unitCost = $_POST['unitCost'];
+    	$quantity = $_POST['quantity'];
+    	$orderID = $_POST['OrderID'];
+    	$supplierID = $_POST['supplierID'];
+    	$sql="INSERT INTO items (itemName, unitCost, quantity, orderID, supplierID)VALUES('".$itemName."', ".$unitCost." , ".$quantity.", ".$orderID." , ".$supplierID.")";
     }
-print_r($_POST['OrderID']);
-//$connection->query($query);
+//print_r($_POST['OrderID']);
+mysqli_query($connection,$sql);
+//$stmt ->execute();
 mysqli_close($connection);
-//header('Location: /Damavand/projectDetails.php');
+header('Location: /Damavand/getItems.php?id='.$_SESSION['projectID'].'&type=Project.php');
 ?>

@@ -48,14 +48,16 @@
         $customerID = $_POST['customerID'];
         $actualStartDate = $_POST['actualStartDate'];
         $estimatedStartDate = $_POST['estimatedStartDate'];
-        $actualStartDate = $_POST['actualEndDate'];
-        $estimatedStartDate = $_POST['estimatedEndDate'];
+        $actualEndDate = $_POST['actualEndDate'];
+        $estimatedEndDate = $_POST['estimatedEndDate'];
         $status = $_POST['status'];
         $actualCost = $_POST['actualCost'];
         $estimatedCost = $_POST['estimatedCost'];
+        $taskName = $_POST['taskName'];
 
 
-        $sql = "UPDATE task taskID = '".."', phaseID = '".."', projectID = '".."', taskName = '".."', estimatedStartDate = '".."', actualStartDate = '".."', estimatedCost = '".."', estimatedEndDate = '".."', actualEndDate = '".."', actualCost = '".."', status SET WHERE = CONCAT(taskID,phaseID,projectID) = '".$taskID.$phaseID.$projectID."'";
+
+        $sql = "UPDATE SET task taskID = '".$taskID."', phaseID = '".$phaseID."', projectID = '".$projectID."', taskName = '".$taskName."', estimatedStartDate = '".$estimatedStartDate."', actualStartDate = '".$actualStartDate."', estimatedCost = '".$estimatedCost."', estimatedEndDate = '".$estimatedEndDate."', actualEndDate = '".$actualEndDate."', actualCost = '".$actualCost."', status SET WHERE = CONCAT(taskID,phaseID,projectID) = '".$taskID.$phaseID.$projectID."'";
     }
     
 

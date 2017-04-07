@@ -93,7 +93,7 @@
     }
 
 
-    echo '<form action="updateFunction.php" method="POST">';
+    echo '<form name="myForm" action="updateFunction.php" onsubmit="return validateForm()" method="POST">';
     echo 
     "<table id='modifyTable'>
         <tr>
@@ -124,3 +124,44 @@
     mysqli_close($connection);
     ?>
 </div>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+  <script type="text/javascript">
+   function validateForm()
+  {
+          var type = "<?php echo $type; ?>";
+
+          if(type =="Project")
+          {
+              var projectID = document.forms["myForm"]["projectID"].value;
+              var id = "<?php echo $id; ?>";
+              var startDate = document.forms["myForm"]["startDate"].value;
+              var endDate = document.forms["myForm"]["endDate"].value;
+          
+             if (projectID != id)
+             {
+                alert("Project Id cannot be modified please set back to ID "+ id);
+                return false;
+             }else if((Date.parse(endDate)-Date.parse(startDate))<0 || endDate == "")
+         {
+          alert("Invalid End Date");
+          return false;
+         }
+             
+
+             
+          }
+          else if(type=='Order')
+          {
+            alert("ORDER MODIFY");
+          }
+          else if (type == 'Task')
+          {
+            alert("TASK MODIFY");
+          }
+         
+    }
+  </script>
+
+

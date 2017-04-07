@@ -57,7 +57,7 @@
 
 
 
-        $sql = "UPDATE SET task taskID = '".$taskID."', phaseID = '".$phaseID."', projectID = '".$projectID."', taskName = '".$taskName."', estimatedStartDate = '".$estimatedStartDate."', actualStartDate = '".$actualStartDate."', estimatedCost = '".$estimatedCost."', estimatedEndDate = '".$estimatedEndDate."', actualEndDate = '".$actualEndDate."', actualCost = '".$actualCost."', status SET WHERE = CONCAT(taskID,phaseID,projectID) = '".$taskID.$phaseID.$projectID."'";
+        $sql = "UPDATE SET task taskID = '".$taskID."', phaseID = '".$phaseID."', projectID = '".$projectID."', taskName = '".$taskName."', estimatedStartDate = '".$estimatedStartDate."', actualStartDate = '".$actualStartDate."', estimatedCost = '".$estimatedCost."', estimatedEndDate = '".$estimatedEndDate."', actualEndDate = '".$actualEndDate."', actualCost = '".$actualCost."', status ='".$status."' WHERE = CONCAT(taskID,phaseID,projectID) = '".$taskID.$phaseID.$projectID."'";
     }
     
 

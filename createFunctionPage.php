@@ -123,14 +123,14 @@ $(document).ready(function(){
     }
     $addOn = "";
     if($type=='Item'){
-        $addOn ="<select name='OrderID' id='OrderID'>";
+        $addOn =" Add to Order: <select name='OrderID' id='OrderID'>";
         $result = mysqli_query($connection,$sql2);
         while($row = mysqli_fetch_array($result)) {
             $addOn .= "<option id=oid name=oid value=".$row['Order Number'].">Order Number ".$row['Order Number']."</option>";
         }
         $addOn .= "</select>";
     }
-    echo '<tr> <td><input id="submit" type="submit" value="Submit"><input id="submit" type="submit" value="Cancel"> Add to Order: '.$addOn.'</td>';
+    echo '<tr> <td><input id="submit" type="submit" value="Submit"><input id="submit" type="submit" value="Cancel">'.$addOn.'</td>';
     echo "</table>";
     echo '</form>';
     mysqli_close($connection);

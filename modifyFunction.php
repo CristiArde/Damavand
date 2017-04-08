@@ -15,6 +15,7 @@
 
     if($type=='Project'){
         $sql="SELECT projectID as 'Project Number', projectName as 'Project Name', projectManagerID as 'Project Manager ID', customerID as 'Customer ID', startDate as 'Start Date', endDate as 'End Date', siteAddress as 'Address', status as 'Status', estimatedCost as 'Estimated Cost', actualCost as 'Actual Cost' FROM Project WHERE projectID = '".$id."'";
+        $_POST['oid'] = null;
     }else if($type=='Order'){
         $oid = $_POST['oid'];
         $sql="SELECT orderID as 'Order Number', projectID as 'Project Number', phaseID as 'Phase Number', taskID as 'Task Number', supplierID as 'Supplier ID', totalCost as 'Total Cost', orderDate as 'Order Date', estimatedDeliveryDate as 'Estimated Delivery Date' FROM Orders WHERE projectID = '".$id."' AND orderID = '".$oid."'";
@@ -131,13 +132,13 @@
 
 function validateForm()
   {
-          var type = "<?php echo $type; ?>";
+          var type = "<?=$_POST['type'] ?>";
           alert(type);
           
           if(type == 'Project')
           {
               var projectID = document.forms["myForm"]["projectID"].value;
-              var id = "<?php echo $id; ?>";
+              var id = "<?=$_POST['id'] ?>";
               var startDate = document.forms["myForm"]["startDate"].value;
               var endDate = document.forms["myForm"]["endDate"].value;
               var actCost = document.forms["myForm"]["actualCost"].value;
@@ -148,7 +149,8 @@ function validateForm()
              {
                 alert("Project Id cannot be modified please set back to ID "+ id);
                 return false;
-             }else if((Date.parse(endDate)-Date.parse(startDate))<0 || endDate == "")
+             }
+             else if((Date.parse(endDate)-Date.parse(startDate))<0 || endDate == "")
              {
               alert("Invalid End Date");
               return false;
@@ -163,11 +165,12 @@ function validateForm()
                alert("Current Status is not filled properly");
               return false;
              }
-          }
+          } 
+          
           else if(type=='Order')
           {
             var orderID = document.forms["myForm"]["orderID"].value;
-            var id = "<?php echo $oid; ?>";
+            var id = "<?=$_POST['oid'] ?>";
             var projectID = document.forms["myForm"]["projectID"].value;
             var phaseID = document.forms["myForm"]["phaseID"].value;
              var cost = document.forms["myForm"]["totalCost"].value;
@@ -197,8 +200,10 @@ function validateForm()
           }
           else if (type == 'Task')
           {
-            alert("TASK MODIFY");
+            alert("MODIFY TASK");
           }
+          
+         
       }
          
   </script>

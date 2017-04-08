@@ -1,4 +1,4 @@
-<div id="auth-main" class="center">
+
 	<h1>Damavand Construction INC.</h1>
 	<h3>Project Management</h3>
 			<ul>
@@ -37,4 +37,3 @@
 		<div id="txtHint"><b>Project Information Will be Displayed Here</b></div>
 		<div id="txtHint2"></div>
 	</div>
-</div>

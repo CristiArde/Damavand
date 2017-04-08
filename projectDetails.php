@@ -6,6 +6,7 @@
 	</head>
 	<?php
 		$page_content = 'content/projectDetails_Content.php';
+		$page_name = 'project-details';
 		include('master.php');
 	?>
 </html>

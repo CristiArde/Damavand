@@ -18,63 +18,7 @@
   $dateRow = mysqli_fetch_assoc($dateResult);
   
   ?>
-<!DOCTYPE html>
-<html>
-<head>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
-  <script type="text/javascript">
-   
-  function validateForm()
-  {
-          var phaseName= document.forms["myForm"]["phaseName"].value;
-          var status= document.forms["myForm"]["status"].value;
-          var estStartDate = document.forms["myForm"]["estStartDate"].value;
-          var estEndDate = document.forms["myForm"]["estEndDate"].value;
-          var actualStartDate = document.forms["myForm"]["actualStartDate"].value;
-          var actualEndDate = document.forms["myForm"]["actualEndDate"].value;
-          var projectDate = "<?php echo $dateRow['startDate']; ?>";
-         // alert(projectDate);
-          //return false;
-      
-         if (phaseName == "")
-         {
-            alert("Phase Name must be filled")
-            return false;
-         }
-         else if ((status =="") || !(status == "Complete" || status == "In Progress" || status == "Not Started"))
-         {
-           alert("Current Status is not filled properly");
-          return false;
-         }
-         else if((Date.parse(estStartDate)-Date.parse(projectDate))<0 || estStartDate == "")
-         {
-          alert("Invalid Estimated Start date");
-          return false;
-         }
-         else if((Date.parse(actualStartDate)-Date.parse(projectDate))<0 || actualStartDate == "")
-         {
 
-          alert("Invalid Actual Start date");
-          return false;
-         }
-         else if(((Date.parse(estEndDate)-Date.parse(projectDate))<0 || (Date.parse(estEndDate)-Date.parse(estStartDate))<0) || estEndDate =="")
-         {
-
-          alert("Invalid Estimate End date");
-          return false;
-         } 
-         else if(((Date.parse(actualEndDate)-Date.parse(projectDate))<0 || (Date.parse(actualEndDate)-Date.parse(actualStartDate))<0)|| actualEndDate =="")
-         {
-
-          alert("Invalid Actual End date");
-          return false;
-         }
-    }
-  </script>
-</head>
-
-
-<div id='modify-phase-main' class='center'>
   
     <h1>Damavand Construction INC.</h1>
     
@@ -120,5 +64,3 @@
         </tr>
       </table>
   </form>
-</div>
-</html>

@@ -9,6 +9,7 @@
 	//echo  $_GET['type'];
 	
 	$page_content = 'content/getOrders_content.php';
+	$page_name = 'orders';
 	include('master.php');
 	?>
 </html>

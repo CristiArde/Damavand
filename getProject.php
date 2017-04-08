@@ -7,6 +7,7 @@
 	<body>
 		<?php
 			$page_content = 'content/getProject_content.php';
+			$page_name = 'project';
 			include('master.php');
 		?>
 	</body>

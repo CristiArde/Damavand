@@ -1,4 +1,4 @@
-<div id="project-details-main" class="center">
+
 	<h1>Damavand Construction INC.</h1>
 	<h3>Project Details and Phases</h3>
 	
@@ -254,4 +254,3 @@
 			</td>
 		</tr>
 	</table>
-</div>

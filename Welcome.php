@@ -50,6 +50,7 @@ session_start();
 	</head>
 	<?php
 	$page_content = 'content/welcome_content.php';
+	$page_name = 'welcome';
 	include('master.php');	
 	?>	
 </html>

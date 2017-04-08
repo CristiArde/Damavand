@@ -43,6 +43,7 @@ if(isset($_POST['btn_Login']))
 	</head>
 	<?php 
 	$page_content = 'content/index_content.php';
+	$page_name = 'index';
 	include('master.php');
 	?>
 </html>

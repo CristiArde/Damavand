@@ -1,4 +1,4 @@
-<div id="login-main" class="center">			
+			
 	<h1>Damavand Construction INC.</h1>
 	<form action="" method="post">
 		<table id="login-table" class="center">
@@ -18,4 +18,4 @@
 			</tr>
 		</table>										
 	</form>
-</div>
+

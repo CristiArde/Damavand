@@ -7,6 +7,7 @@
   <body>
     <?php
     $page_content = 'content/modifyPhase_content.php';
+		$page_name = 'modify-phase';
     include('master.php');
     ?>
   </body>

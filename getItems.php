@@ -5,6 +5,7 @@
 </head>
     <?php
         $page_content = 'content/getItems_content.php';
+				$page_name = 'items';
         include('master.php');
     ?>
 </html>

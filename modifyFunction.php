@@ -15,6 +15,7 @@
 
     if($type=='Project'){
         $sql="SELECT projectID as 'Project Number', projectName as 'Project Name', projectManagerID as 'Project Manager ID', customerID as 'Customer ID', startDate as 'Start Date', endDate as 'End Date', siteAddress as 'Address', status as 'Status', estimatedCost as 'Estimated Cost', actualCost as 'Actual Cost' FROM Project WHERE projectID = '".$id."'";
+        $_POST['oid'] = null;
     }else if($type=='Order'){
         $oid = $_POST['oid'];
         $sql="SELECT orderID as 'Order Number', projectID as 'Project Number', phaseID as 'Phase Number', taskID as 'Task Number', supplierID as 'Supplier ID', totalCost as 'Total Cost', orderDate as 'Order Date', estimatedDeliveryDate as 'Estimated Delivery Date' FROM Orders WHERE projectID = '".$id."' AND orderID = '".$oid."'";
@@ -128,40 +129,83 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
   <script type="text/javascript">
-   function validateForm()
-  {
-          var type = "<?php echo $type; ?>";
 
-          if(type =="Project")
+function validateForm()
+  {
+          var type = "<?=$_POST['type'] ?>";
+          alert(type);
+          
+          if(type == 'Project')
           {
               var projectID = document.forms["myForm"]["projectID"].value;
-              var id = "<?php echo $id; ?>";
+              var id = "<?=$_POST['id'] ?>";
               var startDate = document.forms["myForm"]["startDate"].value;
               var endDate = document.forms["myForm"]["endDate"].value;
-          
+              var actCost = document.forms["myForm"]["actualCost"].value;
+              var estCost = document.forms["myForm"]["estimatedCost"].value;
+              var status = document.forms["myForm"]["status"].value;
+        
              if (projectID != id)
              {
                 alert("Project Id cannot be modified please set back to ID "+ id);
                 return false;
-             }else if((Date.parse(endDate)-Date.parse(startDate))<0 || endDate == "")
-         {
-          alert("Invalid End Date");
-          return false;
-         }
-             
-
-             
-          }
+             }
+             else if((Date.parse(endDate)-Date.parse(startDate))<0 || endDate == "")
+             {
+              alert("Invalid End Date");
+              return false;
+             }
+             else if (!(Number.isInteger(parseInt(actCost)) && Number.isInteger(parseInt(estCost))) || actCost < 0 || estCost < 0)
+             {
+                alert("Cost must be positive integer");
+                return false;
+             }
+             else if ((status =="") || !(status == "Complete" || status == "In Progress" || status == "Not Started"))
+             {
+               alert("Current Status is not filled properly");
+              return false;
+             }
+          } 
+          
           else if(type=='Order')
           {
-            alert("ORDER MODIFY");
+            var orderID = document.forms["myForm"]["orderID"].value;
+            var id = "<?=$_POST['oid'] ?>";
+            var projectID = document.forms["myForm"]["projectID"].value;
+            var phaseID = document.forms["myForm"]["phaseID"].value;
+             var cost = document.forms["myForm"]["totalCost"].value;
+             var orderDate = document.forms["myForm"]["orderDate"].value;
+             var deliveryDate = document.forms["myForm"]["estimatedDeliveryDate"].value;
+
+             if (orderID != id)
+             {
+                alert("Order Id cannot be modified please set back to ID "+ id);
+                return false;
+            }
+            else if (!(Number.isInteger(parseInt(cost))) || cost < 0)
+            {
+                alert("Cost must be positive integer");
+                return false;
+            }
+            else if((Date.parse(orderDate)-Date.parse(new Date()))<0 || orderDate =="")
+             {
+                  alert("Invalid Order Date");
+                  return false;
+             }
+             else if((Date.parse(deliveryDate)-Date.parse(orderDate))<0 || endDate == "")
+             {
+              alert("Invalid Delivery Date");
+              return false;
+             }
           }
           else if (type == 'Task')
           {
-            alert("TASK MODIFY");
+            alert("MODIFY TASK");
           }
+          
          
-    }
+      }
+         
   </script>
 
 

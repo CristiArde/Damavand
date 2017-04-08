@@ -1,29 +1,27 @@
-<<<<<<< HEAD
-Validation on pages
+Validation on pages						[]
 Create Orders							[x]
 Create Project							[x]
 Create items							[x]
-Modify items
-Delete items
-Create payment tasks
-Create payment orders
-Modify payment tasks
-Modify payment orders
-Delete payment tasks
-Delete payments order
-Triggers to update parent tables
-Payments tables
-Register users
-Customer pages
-Session validation for customer and company staff
-=======
-payments page
-register user page
-task connection verification
-customer views/pages
-have at least 1 trigger
-verify if all data being displayed is correct in database (all pages)
->>>>>>> origin/master
+Modify items							[raj]
+Delete items							[raj]
+Create payment tasks						[raj]	
+Create payment orders						[raj]
+Modify payment tasks						[raj]
+Modify payment orders						[raj]
+Delete payment tasks						[raj]
+Delete payments order						[raj]
+Triggers to update parent tables				[]
+Create Payments tables						[x]
+Register users							[]
+Customer pages							[]
+Session validation for customer and company staff		[]
+Tables must be 3NF						[]
+Make it look better (CSS)					[]
+ER diagram to Relational Diagram scheme				[Abel]
+
+
+
+
 
 25% report
 40% functionality

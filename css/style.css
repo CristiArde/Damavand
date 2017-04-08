@@ -33,6 +33,11 @@ h3 {
 #btn-login {
 	width: 100%;
 }
+
+#login-error {
+    color: red;
+    text-align: center;
+}
 /*End index.php*/
 
 

@@ -22,6 +22,7 @@
     }else if($type=='Task'){
         //primary key =  concatination of projectID,phaseID & taskID
         $sql ="SELECT taskID as 'Task Number', phaseID as 'Phase Number', projectID as 'Project Number', taskName as 'Task Name', estimatedStartDate as 'Estimated Start Date', actualStartDate as 'Actual Start Date', estimatedCost as 'Estimated Cost', estimatedEndDate as 'Estimated End Date', actualEndDate as 'Actual End Date', actualCost as 'Actual Cost', status as 'Status' FROM `task` where CONCAT(taskID,phaseID,projectID) = '".$id."'";
+         $_POST['oid'] = null;
     }
     
     $result = mysqli_query($connection,$sql);
@@ -133,7 +134,6 @@
 function validateForm()
   {
           var type = "<?=$_POST['type'] ?>";
-          alert(type);
           
           if(type == 'Project')
           {
@@ -200,7 +200,46 @@ function validateForm()
           }
           else if (type == 'Task')
           {
-            alert("MODIFY TASK");
+            var  taskName = document.forms["myForm"]["taskName"].value;
+            var  estSdate = document.forms["myForm"]["estimatedStartDate"].value;
+            var  actSdate = document.forms["myForm"]["actualStartDate"].value;
+            var  estCost = document.forms["myForm"]["estimatedCost"].value;
+            var actEEDate = document.forms["myForm"]["estimatedEndDate"].value;
+            var actEndDate = document.forms["myForm"]["actualEndDate"].value;
+            var actCost = document.forms["myForm"]["actualCost"].value;
+            var status = document.forms["myForm"]["status"].value;
+
+
+            if (taskName == "")
+            {
+               alert("Please enter a Task Name");
+               return false;
+            }
+            else if ((Date.parse(actSdate)-Date.parse(estSdate))<0 || actSdate == "")
+            {
+              alert("Invalit Acutal Start Date");
+              return false;
+            }
+            else if((Date.parse(actEEDate)-Date.parse(estSdate))<0 || actEEDate == "")
+             {
+              alert("Invalid  Estimated End Date");
+              return false;
+             }
+              else if((Date.parse(actEndDate)-Date.parse(estSdate))<0 || actEndDate == "")
+             {
+              alert("Invalid Actual End Date");
+              return false;
+             }
+            else if (!(Number.isInteger(parseInt(actCost)) && Number.isInteger(parseInt(estCost))) || actCost < 0 || estCost < 0)
+            {
+              alert("Cost must be positive integer");
+              return false;
+            }
+            else if ((status =="") || !(status == "Complete" || status == "In Progress" || status == "Not Started"))
+            {
+              alert("Current Status is not filled properly");
+              return false;
+            }
           }
           
          

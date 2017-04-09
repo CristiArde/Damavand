@@ -20,6 +20,7 @@ $(document).ready(function(){
     $count = 0;
     $type = $_POST['type'];
     $_SESSION['type'] = $type;
+    $projectID = ['projectID'];
     //$phaseID = $_POST['phaseID'];
 
     if($type=='Project'){
@@ -65,6 +66,7 @@ $(document).ready(function(){
         $fieldType[$count] = $fields->type;
         $count ++;
     }
+
     echo "</tr>";
     echo "<tr>";
 
@@ -77,22 +79,27 @@ $(document).ready(function(){
         <li>
             <button  onclick=\"location.href ='Welcome.php';\" class=\"button button2\">Home</button>
             >>
-            <button onclick=\"location.href ='projectDetails.php';\" class=\"button button2\">Modify Project  </button> 
+            <button onclick=\"location.href ='projectDetails.php';\" class=\"button button2\">Create Project  </button> 
         </li>
     </ul>";
-    }else if($type=='Task'){
+    }else if($type=='Order'){
        echo "<ul>
         <li>
             <button onclick=\"location.href ='Welcome.php';\" class=\"button button2\">Home</button>
             >>
-            <button onclick=\"location.href ='projectDetails.php';\" class=\"button button2\">Project " .$valueArray[2]. "  Details</button>
-            >>
-            <button onclick=\"location.href ='task.php';\" class=\"button button2\">Phase " .$valueArray[1]." Tasks</button>
-            >>
-            <button onclick='window.location.reload(true);' class=\"button button2\">Modify Task ".$valueArray[0]."</button>
-
+           <button onclick='window.location.reload(true);' class=\"button button2\">Create New Order</button>
         </li>
     </ul>";
+    }
+    else if ($type == 'Item')
+    {
+         echo "<ul>
+                <li>
+                    <button  onclick=\"location.href ='Welcome.php';\" class=\"button button2\">Home</button>
+                    >>
+                     <button onclick='window.location.reload(true);' class=\"button button2\">Create New Item</button>    
+                </li>
+            </ul>";
     }
 
 

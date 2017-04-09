@@ -30,7 +30,7 @@
   <form action="/Damavand/taskInsertpayment.php" method="POST">
   Paid: <input type="text" id="paid" name="paid"><br><br>
   Total Amount: <input type="text" id="ttlAmnt" name="ttlAmnt"><br><br>
-    SupplierID: <input type="text" id="supID" name="supID"><br><br>
+  SupplierID: <input type="text" id="supID" name="supID"><br><br>
   <button type="submit" name="altertype" value="1">Add</button>
 </form>
   <?php

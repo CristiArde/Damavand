@@ -23,8 +23,7 @@ $alterType = $_POST['altertype'];
     else if($alterType == 2)
     {
        $paymentOrderID = $_SESSION['paymentOrderID'];
-       $supplierID = $_POST['superID'];
-       $query = 'UPDATE paymentstask SET paid ="'.$paid.'",totalAmount = "'.$ttlAmnt.'" WHERE paymentTaskID = "'.$paymentTaskID.'"';
+       $query = 'UPDATE paymentsorders SET paid ="'.$paid.'",totalAmount = "'.$ttlAmnt.'" WHERE paymentOrderID = "'.$paymentOrderID.'"';
         if (mysqli_query($connection, $query)) {
     echo "Record updated successfully";
 } else {

@@ -36,7 +36,7 @@
 	 <input type="hidden" id='taskID' name="taskID" value= <?php echo $taskID; ?>>
 	 <input type="hidden" id='phaseID' name="phaseID" value= <?php echo $phaseID; ?>>
 	 <input type="hidden" id='projectID' name="projectID" value= <?php echo $projectID; ?>>
-	<button type="submit" name="id" value=<?php echo 0; ?>>Add Task</button>
+	<button type="submit" name="id" value=<?php echo 0; ?>>Add Task Payment</button>
 </form> 
 <form action="OrderAlterPayment.php" method="POST">
 	<?php $alter = 1; #Add
@@ -44,7 +44,7 @@
 	?>
 	<input type="hidden" id='superid' name="superid" value= <?php echo $supplyID ?>>
 	 <input type="hidden" id='alter' name="alter" value= <?php echo $alter; ?>>
-	<button type="submit" name="id" value=<?php echo 0; ?>>Add Order</button>
+	<button type="submit" name="id" value=<?php echo 0; ?>>Add Order Payment</button>
 </form> 
 <tr><th>Task Payments</th></tr>
 <?php 

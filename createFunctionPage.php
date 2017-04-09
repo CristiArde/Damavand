@@ -1,6 +1,7 @@
 <head>
   <link href="css/style.css" rel="stylesheet" type="text/css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="js/lib/jquery-validation-1.16.0/lib/jquery-3.1.1.js"></script>
+  <script src="js/lib/jquery-validation-1.16.0/dist/jquery.validate.js"></script>
 <script>
 $(document).ready(function(){
     $(document.getElementById("itemButton")).click(function(){
@@ -66,6 +67,24 @@ $(document).ready(function(){
         $fieldType[$count] = $fields->type;
         $count ++;
     }
+
+    //get column nullable or not
+    //column metadata is in information_schema database, change dbs temporarily
+    $sql3 = "SELECT column_name, is_nullable FROM INFORMATION_SCHEMA.COLUMNS
+             where table_schema = 'ctc353_4'
+             and table_name = '$type'";
+    $result = mysqli_query($connection, $sql3);
+    var_dump($result);
+    $fieldsNullable=mysqli_fetch_fields($result);
+    $fieldNullable = array();
+    //$countNullable = 0;
+
+    while($fieldsNullable=mysqli_fetch_field($result)) {
+        $row = mysqli_fetch_assoc($result);
+        $fieldNullable[$row['column_name']] = $row['is_nullable'] == 'NO' ? false : true;
+        //$countNullable ++;
+    }
+    var_dump($fieldNullable);
 
     echo "</tr>";
     echo "<tr>";

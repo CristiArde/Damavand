@@ -52,11 +52,16 @@
 	WHERE projectID ="'.$projectID.'" AND phaseID = "'.$phaseID.'" AND taskID = "'.$taskID.'" ORDER BY paymentTASKID';
 	$results = mysqli_query($connection, $query);
 	while ($payment = mysqli_fetch_assoc($results)) {
-		$counter++;
+		
 	?>
 	<tr><td>
 	<?php
-		echo 'Payement ID: '.$counter;
+		echo 'Task Id: '.$taskID;
+	?>
+	</tr></td>
+	<tr><td>
+	<?php
+		echo 'Supplier Id: '.$payment['supplierID'];
 	?>
 	</tr></td>
 	<tr><td>
@@ -64,6 +69,7 @@
 		echo 'Paid: '.$payment['paid'];
 	?>
 	</tr></td>
+
 	<tr><td>
 	<?php
 		echo 'Total Amount: '.$payment['totalAmount'];

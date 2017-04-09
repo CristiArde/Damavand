@@ -14,12 +14,10 @@ $alterType = $_POST['altertype'];
       $supplierID = $_POST['supID'];
       $newID =  'SELECT MAX(paymentTaskID) as newID from paymentstask where projectID ="'.$projectID.'"
       AND taskID ="'.$taskID.'" AND phaseID ="'.$phaseID.'"';
-        $result = mysqli_query($connection, $newID);
-        $NewPayId = mysqli_fetch_assoc($result);
-      
-       $newAssignedID = $NewPayId['newID'] + 1;
+        $result = mysqli_query($connection, $newID);      
 
-      $query =  'INSERT INTO paymentstask(paymentTASKID, projectID,phaseID,taskID,supplierID,paid,totalAmount) VALUES ("'.$newAssignedID.'","'.$projectID.'","'.$phaseID.'","'.$taskID.'","'.$supplierID.'","'.$paid.'","'.$ttlAmnt.'")';
+      $query =  'INSERT INTO paymentstask(projectID,phaseID,taskID,supplierID,paid,totalAmount) VALUES ("'.$projectID.'",
+        "'.$phaseID.'","'.$taskID.'","'.$supplierID.'","'.$paid.'","'.$ttlAmnt.'")';
       $connection->query($query);
     }
     else if($alterType == 2)

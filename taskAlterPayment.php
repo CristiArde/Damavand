@@ -30,7 +30,18 @@
   <form action="/Damavand/taskInsertpayment.php" method="POST">
   Paid: <input type="text" id="paid" name="paid"><br><br>
   Total Amount: <input type="text" id="ttlAmnt" name="ttlAmnt"><br><br>
-  SupplierID: <input type="text" id="supID" name="supID"><br><br>
+  Supplier ID: <select name="supID" id="supID">
+  <?php
+  $query =  'select supplierID from supplier';  
+  $results = mysqli_query($connection, $query);
+  while($supplier = mysqli_fetch_assoc($results))
+  {
+    ?>
+    <option value=<?php echo $supplier['supplierID']; ?>> <?php echo $supplier['supplierID']; ?> </option>
+    <?php
+  }
+  ?>
+  </select>
   <button type="submit" name="altertype" value="1">Add</button>
 </form>
   <?php

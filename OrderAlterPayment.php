@@ -25,8 +25,8 @@
   Total Amount: <input type="text" id="ttlAmnt" name="ttlAmnt"><br><br>
   Supplier ID: <select name="supID" id="supID">
   <?php
-  $query =  'select supplierID from paymentstask WHERE projectID = "'.$projectID.'"AND phaseID = "'.$phaseID.'" AND 
-  taskID = "'.$taskID.'"';  
+  $query =  'select supplierID from orders WHERE projectID = "'.$projectID.'"AND phaseID = "'.$phaseID.'" AND 
+  taskID = "'.$taskID.'"';   
   $results = mysqli_query($connection, $query);
   while($supplier = mysqli_fetch_assoc($results))
   {

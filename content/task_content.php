@@ -197,7 +197,9 @@
 				<input name="type" id="type" type="hidden" value = "Task">
 				<button type="submit" name="id" value=<?php echo $row['taskID'].$phaseID.$projectID; ?>>Task Orders</button>
 			</form> 
-			<button type="submit">Payments</button>
+			<form action="taskPayment.php" method="POST">
+			<button type="submit" name="id" value=<?php echo $row['taskID'].$phaseID.$projectID; ?>>Payments</button>
+		</form> 
 		</td>
 	</tr>
 	<?php } #while condition brace 

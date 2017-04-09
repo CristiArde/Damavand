@@ -117,10 +117,11 @@
                 $inputType = '<input type="Date" ';      
         }
         echo "<td>".$fieldArray[$x]."</td>";
-        echo "<td>".$inputType."value=".$valueArray[$x]." id=".$fieldOrig[$x]." name=".$fieldOrig[$x].">"."</td>";
+        echo "<td>".$inputType."value=".$valueArray[$x]." id=\"".$fieldOrig[$x]."\" name=\"".$fieldOrig[$x]."\">"."</td>";
         echo "</tr>";
     }
-    echo '<tr> <td><input id="submit" type="submit" value="Submit"><input id="submit" type="submit" value="Cancel"></td>';
+    echo '<input type="hidden" id="type" name="type" value= "'.$type.'"';
+    echo '<tr> <td><input id="submit" type="submit" value="Submit"><input id="submit" type="submit" value="Cancel"></td></tr>';
     echo "</table>";
     echo '</form>';
     mysqli_close($connection);

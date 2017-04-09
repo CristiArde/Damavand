@@ -13,6 +13,7 @@
     $type = $_POST['type'];
     //$phaseID = $_POST['phaseID'];
 
+    
     if($type=='Project'){
         $projectID = $_POST['projectID'];
         $projectName = $_POST['projectName'];;
@@ -64,9 +65,11 @@
 
     $result = mysqli_query($connection,$sql);
     mysqli_close($connection);
+  
     if($type == 'Task')
         header('Location: /Damavand/task.php');
     else
         header('Location: /Damavand/Welcome.php');
+    
     ?>
 </div>

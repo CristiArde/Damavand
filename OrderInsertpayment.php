@@ -10,14 +10,8 @@ $alterType = $_POST['altertype'];
       $supplierID = $_POST['supID']; #THE SUPPLIER ID THAT WILL BE REPLACED
       $orderID = $_POST['orderID'];
 
-      $newID =  'SELECT MAX(paymentOrderID) as newID from paymentsorders';
-        $result = mysqli_query($connection, $newID);
-        $NewPayId = mysqli_fetch_assoc($result);
-      
-       $newAssignedID = $NewPayId['newID'] + 1;
-
-      $query =  'INSERT INTO paymentsorders(paymentOrderID, orderID,supplierID,paid,totalAmount) VALUES 
-      ("'.$newAssignedID.'","'.$orderID.'","'.$supplierID.'","'.$paid.'","'.$ttlAmnt.'"';
+       $query =  'INSERT INTO paymentsorders(orderID,supplierID,paid,totalAmount) VALUES 
+      ("'.$orderID.'","'.$supplierID.'","'.$paid.'","'.$ttlAmnt.'")';
       $connection->query($query);
     }
     else if($alterType == 2)
@@ -29,8 +23,7 @@ $alterType = $_POST['altertype'];
 } else {
     echo "Error updating record: " . mysqli_error($connection);
 }
-      //$connection->query($query);
     }
 mysqli_close($connection);
-//header('Location: /Damavand/taskPayment.php');
+header('Location: /Damavand/taskPayment.php');
   ?>

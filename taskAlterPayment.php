@@ -40,7 +40,6 @@
       AND taskID ="'.$taskID.'" AND phaseID ="'.$phaseID.'" AND paymentTaskID ="'.$paymentTaskID.'"';
   $results = mysqli_query($connection, $query);
   $row = mysqli_fetch_assoc($results);
-  print_r($query);
   ?>
   <form action="/Damavand/taskInsertpayment.php" method="POST">
   Paid: <input type="text" name="paid" value=<?php echo $row['paid']; ?>><br><br>
@@ -54,6 +53,7 @@
   {
     $query =  'DELETE FROM paymentstask where paymentTaskID ="'.$paymentTaskID.'"';
     $connection->query($query);
+    header('Location: /Damavand/taskPayment.php');
   }
   ?>
 

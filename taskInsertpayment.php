@@ -34,5 +34,5 @@ $alterType = $_POST['altertype'];
       //$connection->query($query);
     }
 mysqli_close($connection);
-//header('Location: /Damavand/taskPayment.php');
+header('Location: /Damavand/taskPayment.php');
   ?>

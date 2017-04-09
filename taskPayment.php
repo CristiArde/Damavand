@@ -44,6 +44,9 @@
 	?>
 	<input type="hidden" id='superid' name="superid" value= <?php echo $supplyID ?>>
 	 <input type="hidden" id='alter' name="alter" value= <?php echo $alter; ?>>
+	 <input type="hidden" id='projectID' name="projectID" value= <?php echo $projectID; ?>>
+    <input type="hidden" id='taskID' name="taskID" value= <?php echo $taskID; ?>>
+     <input type="hidden" id='phaseID' name="phaseID" value= <?php echo $phaseID; ?>>
 	<button type="submit" name="id" value=<?php echo 0; ?>>Add Order Payment</button>
 </form> 
 <tr><th>Task Payments</th></tr>
@@ -93,7 +96,7 @@
 			   <input type="hidden" id='taskID' name="taskID" value= <?php echo $taskID; ?>>
 			    <input type="hidden" id='phaseID' name="phaseID" value= <?php echo $phaseID; ?>>
 			     <input type="hidden" id='projectID' name="projectID" value= <?php echo $projectID; ?>>
-			<button type="submit" name="id" value=<?php $payment['paymentTASKID']; ?>>Remove</button>
+			<button type="submit" name="id" value=<?php echo $payment['paymentTASKID']; ?>>Remove</button>
 		</form>
 	</td></tr>
 	<?php
@@ -101,7 +104,7 @@
 ?>
 	<tr><th>Order Payments</th></tr>
 <?php
-	$query =  'SELECT paymentOrderID, p.supplierID as supID, paid, totalAmount FROM paymentsorders p, orders o WHERE 
+	$query =  'SELECT paymentOrderID, p.orderID as ordID, p.supplierID as supID, paid, totalAmount FROM paymentsorders p, orders o WHERE 
 	p.orderID = o.orderID AND projectID = "'.$projectID.'" AND phaseID = "'.$phaseID.'" AND taskID = "'.$taskID.'"';
 	$resultsOrder = mysqli_query($connection, $query);
 	while($orderIds = mysqli_fetch_assoc($resultsOrder))
@@ -109,7 +112,7 @@
 ?>
 <tr><td>
 <?php
-			echo 'OrderId: '.$orderIds['paymentOrderID'];
+			echo 'OrderId: '.$orderIds['ordID'];
 ?>
 </tr></td>
 <tr><td>
@@ -136,7 +139,8 @@
 		</form> 
 		<form action="OrderAlterPayment.php" method="POST">
 			<?php $alter = 3; #Remove?>
-			<input type="hidden" id='alter' name="alter" value= <?php echo $payment['supplierID']; ?>>
+			<input type="hidden" id='superid' name="superid" value= <?php echo $payment['supplierID']; ?>>
+			<input type="hidden" id='alter' name="alter" value=3>
 			<button type="submit" name="id" value=<?php echo $orderIds['paymentOrderID']; ?>>Remove</button>
 		</form>
 	</td></tr>

@@ -38,7 +38,7 @@
         $estimatedDeliveryDate = $_POST['estimatedDeliveryDate'];
 
         $sql = "UPDATE orders SET orderID = ".$orderID.", projectID = ".$projectID.", phaseID = ".$phaseID.", taskID = ".$taskID.", supplierID = ".$supplierID.", totalCost = ".$totalCost.", orderDate  = '".$orderDate."', estimatedDeliveryDate = '".$estimatedDeliveryDate."' WHERE CONCAT(taskID,phaseID,projectID) = ".$taskID.$phaseID.$projectID;
-        echo $sql;
+        
        
     }else if($type=='Task'){
         //primary key =  concatination of projectID,phaseID & taskID
@@ -59,20 +59,20 @@
 
 
         $sql = "UPDATE task SET taskID = ".$taskID.", phaseID = ".$phaseID.", projectID = ".$projectID.", taskName = '".$taskName."', estimatedStartDate = '".$estimatedStartDate."', actualStartDate = '".$actualStartDate."', estimatedCost = ".$estimatedCost.", estimatedEndDate = '".$estimatedEndDate."', actualEndDate = '".$actualEndDate."', actualCost = ".$actualCost.", status ='".$status."' WHERE CONCAT(taskID,phaseID,projectID) = ".$taskID.$phaseID.$projectID;
-        echo $sql;
+       
     }
     
 
 
     $result = mysqli_query($connection,$sql);
     mysqli_close($connection);
-/* 
+ 
     if($type == 'Task')
         header('Location: /Damavand/task.php');
     else
         header('Location: /Damavand/Welcome.php');
    
- */  
+ 
     ?>
  
 </div>

@@ -26,10 +26,19 @@
 				</select>
 			</td>
 			<td>
+			<?php
+				if (strpos($_SESSION['username'], 'damavand') !== false)
+				{
+
+			?>
 				<form action='createFunctionPage.php' method='POST'>
+				
 				<input type="hidden" id="type" name="type" value="Project">
 				<input type='submit' value='Create Project'>
 				</form>
+			<?php
+				}
+			?>
 			</td>
 			</tr>
 	</table>

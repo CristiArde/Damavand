@@ -2,10 +2,11 @@
 <div id='items-main' class='center'>
     <?php
     session_start();
-    $id = $_GET['id'];
+        $id = $_GET['id'];
+    $_SESSION['projectID'] = $id;
     //$type = $_GET['type'];
     require 'connection.php';
-    $sql="SELECT supplierName, o.projectID, phaseID, i.orderID , itemName, unitCost, quantity FROM items i INNER JOIN orders o on i.orderID = o.orderID INNER JOIN supplier s ON i.supplierID = s.supplierID WHERE o.projectID = '".$id."' GROUP BY supplierName,o.projectID, i.orderID , itemName, unitCost, quantity HAVING o.projectID = '".$id."'";
+    $sql="SELECT itemID, supplierName, o.projectID, phaseID, i.orderID , itemName, unitCost, quantity FROM items i INNER JOIN orders o on i.orderID = o.orderID INNER JOIN supplier s ON i.supplierID = s.supplierID WHERE o.projectID = '".$id."' GROUP BY supplierName,o.projectID, i.orderID , itemName, unitCost, quantity HAVING o.projectID = '".$id."'";
 
     $result = mysqli_query($connection,$sql);
     $check = mysqli_num_rows($result);
@@ -47,6 +48,21 @@
             echo "<td>" . $row['itemName'] . "</td>";
             echo "<td>$" . $row['unitCost'] . "</td>";
             echo "<td>" . $row['quantity'] . "</td>";
+            ?>
+    <td>
+    <form action="modifyItem.php" method="POST">
+        <input type="hidden" id="type" name="type" value="Item">
+        <input type="hidden" id="alter" name="alter" value="1">
+        <button type="submit" id="id" name="id" value= <?php echo $row['itemID']; ?>> Modify Item</button>
+    </form>
+    </td><td>
+    <form action="modifyItem.php" method="POST">
+        <input type="hidden" id="type" name="type" value="Item">
+        <input type="hidden" id="alter" name="alter" value="2">
+        <button type="submit" id="id" name="id" value= <?php echo $row['itemID']; ?>> Delete Item</button>
+    </form>
+    </td>
+            <?php
            $count += 1;
         }
         echo "</table>";
@@ -66,7 +82,6 @@
         <input type="hidden" id="type" name="type" value="Item">
         <input type="Submit" value="Create New Item">
     </form>
-
     <?php
     mysqli_close($connection);
     ?>

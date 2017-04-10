@@ -121,7 +121,7 @@
         echo "</tr>";
     }
     echo '<input type="hidden" id="type" name="type" value= "'.$type.'"';
-    echo '<tr> <td><input id="submit" type="submit" value="Submit"><input id="submit" type="submit" value="Cancel"></td></tr>';
+    echo '<tr> <td><input id="submit" type="submit" value="Submit">';// <input id="submit" type="submit" value="Cancel"></td></tr>';
     echo "</table>";
     echo '</form>';
     mysqli_close($connection);

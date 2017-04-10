@@ -46,7 +46,13 @@
 
 	?>
 	<tr><td>
+	<tr><td>
 	<?php
+		echo 'Task Name:  '.$row['taskName'];
+	?>
+	</td></tr>
+	<?php
+		
 		echo 'Task: '.$row['taskID'].' status: ';
 								if($row['status'] == "Complete")
 								{

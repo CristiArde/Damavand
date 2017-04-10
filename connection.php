@@ -1,4 +1,3 @@
 <?php
-	$connection = mysqli_connect('localhost', 'root', "");
-	mysqli_select_db($connection, 'ctc353_4')
+	$connection = mysqli_connect('localhost', 'root', "", 'ctc353_4');
 ?>

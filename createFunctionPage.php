@@ -1,7 +1,6 @@
 <head>
   <link href="css/style.css" rel="stylesheet" type="text/css">
-  <script src="js/lib/jquery-validation-1.16.0/lib/jquery-3.1.1.js"></script>
-  <script src="js/lib/jquery-validation-1.16.0/dist/jquery.validate.js"></script>
+  <script src="js/jquery-validation-1.16.0/lib/jquery-3.1.1.js"></script>
 <script>
 $(document).ready(function(){
     $(document.getElementById("itemButton")).click(function(){
@@ -27,7 +26,7 @@ $(document).ready(function(){
     if($type=='Project'){
         $sql="SELECT projectName as 'Project Name', projectManagerID as 'Project Manager ID', customerID as 'Customer ID', startDate as 'Start Date', endDate as 'End Date', siteAddress as 'Address', status as 'Status', estimatedCost as 'Estimated Cost', actualCost as 'Actual Cost' FROM Project ORDER BY projectID ASC LIMIT 1";
     }else if($type=='Order'){
-        $sql="SELECT projectID as 'Project Number', phaseID as 'Phase Number', taskID as 'Task Number', supplierID as 'Supplier ID', totalCost as 'Total Cost', orderDate as 'Order Date', estimatedDeliveryDate as 'Estimated Delivery Date' FROM Orders ORDER BY orderID ASC LIMIT 1";
+        $sql="SELECT projectID as 'Project ID', phaseID as 'Phase ID', taskID as 'Task ID', supplierID as 'Supplier ID', totalCost as 'Total Cost', orderDate as 'Order Date', estimatedDeliveryDate as 'Estimated Delivery Date' FROM Orders ORDER BY orderID ASC LIMIT 1";
        // $sql2="SELECT itemID as 'Item ID',  itemName as 'Item Name', unitCost as 'Unit Cost', quantity as 'Quantity', orderID as 'Order Number', supplierID as 'Supplier ID' FROM Items ORDER BY itemID ASC LIMIT 1";
 
 
@@ -46,7 +45,7 @@ $(document).ready(function(){
     }
 */
     }else if($type=='Item'){
-    	$sql2="SELECT  orderID as 'Order Number' FROM Orders ORDER BY orderID ASC";
+    	$sql2="SELECT  orderID as 'Order ID' FROM Orders ORDER BY orderID ASC";
     	$sql="SELECT itemName as 'Item Name', unitCost as 'Unit Cost', quantity as 'Quantity', supplierID as 'Supplier ID' FROM Items ORDER BY itemID ASC LIMIT 1";
     }
     
@@ -67,25 +66,6 @@ $(document).ready(function(){
         $fieldType[$count] = $fields->type;
         $count ++;
     }
-
-    //get column nullable or not
-    //column metadata is in information_schema database, change dbs temporarily
-    $sql3 = "SELECT column_name, is_nullable FROM INFORMATION_SCHEMA.COLUMNS
-             where table_schema = 'ctc353_4'
-             and table_name = '$type'";
-    $result = mysqli_query($connection, $sql3);
-    var_dump($result);
-    $fieldsNullable=mysqli_fetch_fields($result);
-    $fieldNullable = array();
-    //$countNullable = 0;
-
-    while($fieldsNullable=mysqli_fetch_field($result)) {
-        $row = mysqli_fetch_assoc($result);
-        $fieldNullable[$row['column_name']] = $row['is_nullable'] == 'NO' ? false : true;
-        //$countNullable ++;
-    }
-    var_dump($fieldNullable);
-
     echo "</tr>";
     echo "<tr>";
 
@@ -122,7 +102,7 @@ $(document).ready(function(){
     }
 
 
-    echo '<form id="form1" name="form1" action="createFunction.php" method="POST">';
+    echo '<form id="form1" name="form1" action="createFunction.php" method="POST" onsubmit="return validateForm()">';
     echo 
     "<table id='modifyTable'>
         <tr>
@@ -132,16 +112,68 @@ $(document).ready(function(){
         </tr>";
     for($x = 0; $x < $fieldCount; $x++){
         echo "<tr>";
+        $displayName = $fieldArray[$x];
+        $colName = $fieldOrig[$x];
+
         //Decide Input type
         $inputType ="";
+        if (strpos($colName, 'ID') !== false) {
+            $optionID = "";
+            $inputType = "<tr><td>$displayName</td> <td><select name='$colName' id='$colName'>";
+            switch($colName) {
+                case "projectManagerID":
+                    $allOptions = "select staffid as 'Project Manager ID' from companystaff";
+                    $optionID = 'pmid';                  
+                    break;
+                case "customerID":
+                    $allOptions = "select customerid as 'Customer ID' from customer";
+                    $optionID = 'cid';                  
+                    break;
+                case "projectID":
+                    $allOptions = "select projectid as 'Project ID' from project";
+                    $optionID = 'prid';                  
+                    break;
+                case "phaseID":
+                    $allOptions = "select distinct phaseid as 'Phase ID' from phase";
+                    $optionID = 'phid';                  
+                    break;
+                case "taskID":
+                    $allOptions = "select distinct taskid as 'Task ID' from task";
+                    $optionID = 'tid';                  
+                    break;
+                case "supplierID":
+                    $allOptions = "select supplierid as 'Supplier ID' from supplier";
+                    $optionID = 'sid';                  
+                    break;
+            }
+            /*
+            $result = mysqli_query($connection,$sql2);
+            while($row = mysqli_fetch_array($result)) {
+                $addOn .= "<option id=oid name=oid value=".$row['Order ID'].">Order ID ".$row['Order ID']."</option>";
+            }
+            $addOn .= "</select></td></tr>";
+            echo $addOn;
+            */
+            $result = mysqli_query($connection, $allOptions);
+            while ($row = mysqli_fetch_array($result)) {
+                // var_dump($displayName);
+                // var_dump($row["$displayName"]);
+                $inputType .= "<option id=$optionID name=$optionID value=".$row["$displayName"].">".$row["$displayName"]."</option>";
+            }
+            $inputType .= "</select></td></tr>";
+            echo $inputType;
+            continue;
+        }       
+
         switch ($fieldType[$x]) {
             case "3":                                       //Integer
             case "253":                                     //VarChar
             case "246":                                     //Decimal
-                $inputType = '<input type="text" ';
+                $inputType = '<input type="text"';
                 break;
             case "10":                                      //Date
-                $inputType = '<input type="Date" ';      
+                $inputType = '<input type="Date"';      
+                break;
         }
         echo "<td>".$fieldArray[$x]."</td>";
         echo "<td>".$inputType." id=".$fieldOrig[$x]." name=".$fieldOrig[$x].">"."</td>";
@@ -149,16 +181,130 @@ $(document).ready(function(){
     }
     $addOn = "";
     if($type=='Item'){
-        $addOn =" Add to Order: <select name='OrderID' id='OrderID'>";
+        $addOn ="<tr><td>Add to Order:</td> <td><select name='OrderID' id='OrderID'>";
         $result = mysqli_query($connection,$sql2);
         while($row = mysqli_fetch_array($result)) {
-            $addOn .= "<option id=oid name=oid value=".$row['Order Number'].">Order Number ".$row['Order Number']."</option>";
+            $addOn .= "<option id=oid name=oid value=".$row['Order ID'].">Order ID ".$row['Order ID']."</option>";
         }
-        $addOn .= "</select>";
+        $addOn .= "</select></td></tr>";
+        echo $addOn;
     }
-    echo '<tr> <td><input id="submit" type="submit" value="Submit"><input id="submit" type="submit" value="Cancel">'.$addOn.'</td>';
+    echo '<tr> <td colspan="2"><input id="submit" type="submit" value="Submit"><input id="submit" type="submit" value="Cancel"></td></tr>';
     echo "</table>";
     echo '</form>';
     mysqli_close($connection);
     ?>
 </div>
+<script>
+function validateInt(i) {
+    return Number.isInteger(parseInt(i)) && i >= 0;
+}
+function validateForm()
+  {
+          var type = "<?=$_POST['type'] ?>";
+          
+          if(type == 'Project')
+          {
+              var projectName = document.forms["form1"]["projectName"].value;
+              var projectManagerID = document.forms["form1"]["projectManagerID"].value;
+              var customerID = document.forms["form1"]["customerID"].value;
+              var startDate = document.forms["form1"]["startDate"].value;
+              var endDate = document.forms["form1"]["endDate"].value;
+              var siteAddress = document.forms["form1"]["siteAddress"].value;
+              var actCost = document.forms["form1"]["actualCost"].value;
+              var estCost = document.forms["form1"]["estimatedCost"].value;
+              var status = document.forms["form1"]["status"].value;
+
+             if (!projectName) {
+                alert("Project name cannot be null");
+                return false;
+             }
+             if (!validateInt(projectManagerID) || !validateInt(customerID)) {
+                alert ("ID must be a positive integer");
+                return false;
+             }            
+             else if((Date.parse(endDate)-Date.parse(startDate))<0 || endDate == "")
+             {
+              alert("Invalid End Date");
+              return false;
+             }
+             else if (!siteAddress) {
+                alert("Site address cannot be null");
+                return false;
+             }
+             else if (!status || !(status == "Complete" || status == "In Progress" || status == "Not Started"))
+             {
+               alert("Status must be Complete, In Progress, or Not Started");
+              return false;
+             }
+             else if (!validateInt(actCost) || !validateInt(estCost))
+             {
+                alert("Cost must be positive integer");
+                return false;
+             }                       
+          } 
+          
+          else if(type=='Order')
+          {
+            var projectID = document.forms["form1"]["projectID"].value;
+            var phaseID = document.forms["form1"]["phaseID"].value;
+            var taskID = document.forms["form1"]["taskID"].value;
+             var supplierID = document.forms["form1"]["supplierID"].value;
+             var totalCost = document.forms["form1"]["totalCost"].value;
+             var orderDate = document.forms["form1"]["orderDate"].value;
+             var estimatedDeliveryDate = document.forms["form1"]["estimatedDeliveryDate"].value;
+
+            if (!validateInt(projectID)) {
+                alert("Project ID must be a positive integer");
+                return false;
+            }
+            else if (!validateInt(phaseID)) {
+                alert("Phase ID must be a positive integer");
+                return false;
+            }
+            else if (!validateInt(taskID)) {
+                alert("Task ID must be a positive integer");
+                return false;
+            }
+            else if (!validateInt(supplierID)) {
+                alert("Supplier ID must be a positive integer");
+                return false;
+            }
+            else if (!validateInt(totalCost)) {
+                alert("Total cost must be a positive integer");
+                return false;
+            }
+            else if ((Date.parse(estimatedDeliveryDate)-Date.parse(orderDate))<0 || !orderDate || !estimatedDeliveryDate) {
+                alert("Invalid order or estimated delivery dates");
+                return false;
+            }
+          }
+          else if (type == 'Item')
+          {
+            var  itemName = document.forms["form1"]["itemName"].value;
+            var  unitCost = document.forms["form1"]["unitCost"].value;
+            var  quantity = document.forms["form1"]["quantity"].value;
+            var  supplierID = document.forms["form1"]["supplierID"].value;
+
+
+            if (!itemName) {
+                alert("Item name cannot be null");
+                return false;
+            }
+            else if (!validateInt(unitCost)) {
+                alert("Unit cost must be a positive integer");
+                return false;
+            }
+            else if (!validateInt(quantity)) {
+                alert("Quantity must be a positive integer");
+                return false;
+            }
+            else if (!validateInt(supplierID)) {
+                alert("Supplier ID must be a positive integer");
+                return false;
+            }
+          }
+          
+         
+      }
+</script>

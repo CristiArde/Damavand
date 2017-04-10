@@ -1,4 +1,3 @@
-		
 <?php
 session_start();
 $_SESSION['authenticated'] = null;
@@ -58,7 +57,15 @@ if(isset($_POST['btn_Login']))
 		<tr>
 			<td colspan="2"><input id="btn-login" name="btn_Login" type="submit" value="Login"></td>
 		</tr>
-		<tr><td colspan="2"><a href="register.php" class="center">Register</a></td></tr>
+		<tr>
+			<td colspan="2">
+				<a href="register.php" class="center">Register As Customer</a>
+			</td>
+		</tr>
+		<tr>
+			<td><a href="registerStaff.php" class="center">Register As Employee</a>
+			</td>
+		</tr>
 	</table>
 </form>
 <?php
@@ -66,5 +73,4 @@ if (!is_null($_SESSION['authenticated']) && $_SESSION['authenticated'] === false
 	echo '<div id="login-error">Invalid login information.</div>';
 }
 ?>
-
 

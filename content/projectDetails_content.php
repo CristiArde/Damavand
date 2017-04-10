@@ -241,8 +241,6 @@
 							<form action="/Damavand/task.php" method="POST">
 								<button type="submit" name="submitPID" value=<?php echo $row['phaseID'] ?>>Tasks</button>
 							</form>
-
-							<button type="submit">Payments</button>
 						</td>
 					</tr>
 					<?php } #while condition brace ?>

@@ -32,7 +32,18 @@ while($row = mysqli_fetch_array($result)) {
     echo "<tr>";
     echo "<td> Project " . $row['projectID'] . "</td>";
     echo "<td>" . $row['projectName'] . "</td>";
-    echo "<td>" . $row['status'] . "</td>";
+    switch ($row['status']) {
+    	case "Complete":
+    		echo "<td><font color='green'>" . $row['status'] . "</font></td>";
+    		break;
+		case "In Progress":
+			echo "<td><font color='orange'>" . $row['status'] . "</font></td>";
+			break;
+		default:
+			echo "<td><font color='red'>" . $row['status'] . "</font></td>";
+			break;
+    }
+    
     echo "<td>" . $projectManager['firstName'] . " ". $projectManager['lastName'] . " </td>";
     echo "<td>" . $row['startDate'] . "</td>";
 	if($row['endDate'] != "")

@@ -6,12 +6,19 @@ if(isset($_POST['btn_Login']))
 	require'connection.php';
 	$username = $_POST['username'];
 	$password = $_POST['password'];	
-	
+
 	$query = mysqli_query($connection, 'select * from login where username="'.$username.'" and password="'.$password.'" ');
 	$query_userCheck = mysqli_query($connection, 'select COUNT(*) FROM login L, companystaff C WHERE L.userID = C.staffID AND L.username ="'.$username.'"');
 	if(mysqli_num_rows($query) == 1)
 	{
 		$_SESSION['username'] = $username;
+		if (strpos($_SESSION['username'], 'damavand') === false) #customer
+		{
+			$query =  'select customerID from customer where email = "'.$username.'"';
+			$results = mysqli_query($connection, $query);
+  			$row = mysqli_fetch_assoc($results);
+				$_SESSION['customerID'] = $row['customerID'];
+		}
 		$host  = $_SERVER['HTTP_HOST'];
 		$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 

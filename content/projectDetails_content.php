@@ -220,7 +220,8 @@
 								<button type="submit" disabled >Remove Phase</button>
 								</form>
 							<?php 
-							} else {
+							} else 
+							{
 							?>
 								<form action="modifyPhase.php" method="POST">
 									<input id="Pid" name="Pid" type="hidden" value=<?php echo $projectID; ?>>
@@ -231,6 +232,8 @@
 								</form>
 							<?php 
 							} #if condition brace
+							if (strpos($_SESSION['username'], 'damavand') !== false)
+							{
 							?>
 							<form action="getOrders.php" method="GET">
 								<input name="id" id="id" type="hidden" value=<?php echo $projectID; ?>>
@@ -238,6 +241,9 @@
 								<input name="phaseID" id="phaseID" type="hidden" value=<?php echo $row['phaseID'] ?>>
 								<button type="submit">Order</button>
 							</form> 
+							<?php 
+							}
+							?>
 							<form action="/Damavand/task.php" method="POST">
 								<button type="submit" name="submitPID" value=<?php echo $row['phaseID'] ?>>Tasks</button>
 							</form>

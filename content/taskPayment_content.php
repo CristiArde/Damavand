@@ -8,9 +8,9 @@
 	$counter = 0;
 	if(@$_POST['id'] != "") #NEEDS FIXING, GET RID OF THE ARRAY
 	{	
-		$taskID = $_POST['id'][0];
-		$phaseID = $_POST['id'][1];
-		$projectID = $_POST['id'][2];
+		$taskID = $_POST['taskID'];
+		$phaseID = $_POST['phaseID'];
+		$projectID = $_POST['id'];
 	}
 	else
 	{

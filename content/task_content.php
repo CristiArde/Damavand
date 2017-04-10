@@ -198,14 +198,22 @@
 				</form>
 			<?php 
 			} #if condition brace
+			
+			if (strpos($_SESSION['username'], 'damavand') !== false)
+			{
 			?>
 			<form action="getOrders.php" method="GET">
 				<input name="type" id="type" type="hidden" value = "Task">
 				<button type="submit" name="id" value=<?php echo $row['taskID'].$phaseID.$projectID; ?>>Task Orders</button>
 			</form> 
 			<form action="taskPayment.php" method="POST">
-			<button type="submit" name="id" value=<?php echo $row['taskID'].$phaseID.$projectID; ?>>Payments</button>
-		</form> 
+				<input type="hidden" id='taskID' name="taskID" value= <?php echo $row['taskID']; ?>>
+				<input type="hidden" id='phaseID' name="phaseID" value= <?php echo $phaseID; ?>>
+			<button type="submit" name="id" value=<?php echo $projectID; ?>>Payments</button>
+		</form>
+			<?php 
+			}
+			?> 
 		</td>
 	</tr>
 	<?php } #while condition brace 

@@ -19,9 +19,21 @@
 
 
 				<?php
-				
-				foreach ($_SESSION['ProjectID'] as $value) {
-				 echo '<option value="'.$value['projectID'].'">Project '.$value['projectID'].'</option>';
+				if (strpos($_SESSION['username'], 'damavand') === false) #customer
+				{
+				$query = 'select projectID from project where customerID ='.$_SESSION['customerID'];
+				$results = mysqli_query($connection, $query);
+  				$row = mysqli_fetch_assoc($results);
+				 echo '<option value="'.$row['projectID'].'">Project '.$row['projectID'].'</option>';
+				}
+				else
+				{
+					$query = 'select projectID from project';
+					$results = mysqli_query($connection, $query);
+  					while($drow = mysqli_fetch_assoc($results))
+  					{
+				 		echo '<option value="'.$drow['projectID'].'">Project '.$drow['projectID'].'</option>';
+					}
 				}?>
 				</select>
 			</td>

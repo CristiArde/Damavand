@@ -1,7 +1,9 @@
-
+<?php 
+	session_start();
+?>
 <div id='items-main' class='center'>
     <?php
-    session_start();
+    
         $id = $_GET['id'];
     $_SESSION['projectID'] = $id;
     //$type = $_GET['type'];

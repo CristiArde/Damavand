@@ -1,14 +1,17 @@
 <?php
+require_once('connection.php'); 
 session_start();
+
 $_SESSION['authenticated'] = null;
+//print_r($_POST['btn_Login']);
 if(isset($_POST['btn_Login']))
 {
-	require'connection.php';
 	$username = $_POST['username'];
 	$password = $_POST['password'];	
-
+	//print_r($username);
+	//print_r($password);
 	$query = mysqli_query($connection, 'select * from login where username="'.$username.'" and password="'.$password.'" ');
-	$query_userCheck = mysqli_query($connection, 'select COUNT(*) FROM login L, companystaff C WHERE L.userID = C.staffID AND L.username ="'.$username.'"');
+	$query_userCheck = mysqli_query($connection, 'select COUNT(*) FROM login L, companyStaff C WHERE L.userID = C.staffID AND L.username ="'.$username.'"');
 	if(mysqli_num_rows($query) == 1)
 	{
 		$_SESSION['username'] = $username;
@@ -21,22 +24,28 @@ if(isset($_POST['btn_Login']))
 		}
 		$host  = $_SERVER['HTTP_HOST'];
 		$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-
-		if(mysqli_num_rows($query_userCheck) == 1)
+		$check = mysqli_num_rows($query_userCheck);
+		if($check > 0)
 		{
-			$query = mysqli_query($connection, 'select projectID FROM PROJECT');
+			$query = mysqli_query($connection, 'select projectID FROM project');
+			//print_r($query);
 			$projectID = mysqli_fetch_all($query,MYSQLI_ASSOC); 
 			$_SESSION['ProjectID'] = $projectID;
 
 			//print_r( $_SESSION['ProjectID']);
-			$Url = 'welcome.php';
+			$Url = 'Welcome.php';
 		}
 		else
 		{
 			$Url = 'CWelcome.php';
 		}
-		header("Location: http://$host$uri/$Url");
+		//echo 'Location: http://'.$host.$uri.'/'.$Url;
+		//exit(header("Location: /".$host.$uri."/".$Url));
+		
 		$_SESSION['authenticated'] = true;
+		echo '<script type="text/javascript">
+           window.location = "http://'.$host.$uri.'/'.$Url.'";
+      </script>';
 		exit;
 	} else {
 		$_SESSION['authenticated'] = false;
@@ -55,7 +64,7 @@ if(isset($_POST['btn_Login']))
 		</tr>
 		<tr>
 			<td><label>Username :</label></td>
-			<td><input id="name" name="username" type="text"></td>
+			<td><input id="username" name="username" type="text"></td>
 		</tr>
 		<tr>
 			<td><label>Password :</label></td>
